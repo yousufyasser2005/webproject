@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>المحاسبة - متجر الكتب المستعملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
+            <nav class="main-nav">
+                <a href="index.html">الرئيسية</a>
+                <a href="about.html">من نحن</a>
+                <a href="contact.html" class="contact-link">تواصل معنا</a>
+                <a href="sell.html" class="contact-link">بيع</a>
+                <a href="cart.html" class="contact-link">سلة المشتريات</a>
+                <a href="checkout.html" class="contact-link">المحاسبة</a>
+                <a href="my-orders.html" class="contact-link">طلباتي</a>
+                <a href="profile.html" class="contact-link">الملف الشخصي</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>إتمام الشراء</h1>
+        <form id="checkoutForm">
+            <label>الاسم الكامل:</label>
+            <input type="text" id="customerName" required>
+
+            <label>العنوان:</label>
+            <input type="text" id="customerAddress" required>
+
+            <label>طريقة الدفع:</label>
+            <select id="paymentMethod">
+                <option value="عند الاستلام">عند الاستلام</option>
+                <option value="بطاقة إلكترونية">بطاقة إلكترونية</option>
+            </select>
+
+            <button type="submit" class="btn">تأكيد الطلب</button>
+        </form>
+
+        <p id="checkoutMessage" class="message"></p>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 متجر الكتب المستعملة — جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>بيع كتاب - متجر الكتب المستعملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
+            <nav class="main-nav">
+                <a href="index.html">الرئيسية</a>
+                <a href="sell.html">بيع كتاب</a>
+                <a href="cart.html">سلة المشتريات</a>
+                <a href="checkout.html">المحاسبة</a>
+                <a href="my-orders.html">طلباتي</a>
+                <a href="profile.html">الملف الشخصي</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>بيع كتابك</h1>
+        <form id="sellForm" class="sell-form">
+            <label>اسم الكتاب:</label>
+            <input type="text" id="bookTitle" required>
+
+            <label>اسم المؤلف:</label>
+            <input type="text" id="bookAuthor" required>
+
+            <label>السعر المقترح (ج.م):</label>
+            <input type="number" id="bookPrice" required>
+
+            <label>حالة الكتاب:</label>
+            <select id="bookCondition">
+                <option value="جديد">جديد</option>
+                <option value="كالجديد">كالجديد</option>
+                <option value="مستعمل">مستعمل</option>
+            </select>
+
+            <label>صورة الغلاف:</label>
+            <input type="file" id="bookImage" accept="image/*">
+
+            <label>طريقة التسليم:</label>
+            <select id="deliveryMethod">
+                <option value="تسليم في نقطة التجميع">تسليم في نقطة التجميع</option>
+                <option value="استلام من المنزل">استلام من المنزل</option>
+            </select>
+
+            <button type="submit" class="btn">إرسال الكتاب</button>
+        </form>
+
+        <p id="sellMessage" class="message"></p>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 متجر الكتب المستعملة — جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

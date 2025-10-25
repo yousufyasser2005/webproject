@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>الملف الشخصي - متجر الكتب المستعملة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
+            <nav class="main-nav">
+                <a href="index.html">الرئيسية</a>
+                <a href="sell.html">بيع كتاب</a>
+                <a href="cart.html">سلة المشتريات</a>
+                <a href="checkout.html">المحاسبة</a>
+                <a href="my-orders.html">طلباتي</a>
+                <a href="profile.html" class="active">الملف الشخصي</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1>الملف الشخصي</h1>
+        <form id="profileForm">
+            <label>الاسم:</label>
+            <input type="text" id="userName" required>
+
+            <label>البريد الإلكتروني:</label>
+            <input type="email" id="userEmail" required>
+
+            <label>رقم الهاتف:</label>
+            <input type="text" id="userPhone">
+
+            <button type="submit" class="btn">تحديث البيانات</button>
+        </form>
+
+        <p id="profileMessage" class="message"></p>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>© 2025 متجر الكتب المستعملة — جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
