@@ -1,0 +1,146 @@
+:root{
+  --blue:#0b5ed7;
+  --soft:#f3f8ff;
+  --muted:#667085;
+  --card:#ffffff;
+  --radius:12px;
+}
+
+/* عام */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: 'Cairo', sans-serif;
+  background: #fbfcff;
+  color:#0f1724;
+  line-height:1.6;
+}
+.container{
+  max-width:1100px;
+  margin:0 auto;
+  padding:20px;
+}
+
+/* الهيدر */
+.site-header{
+  background:var(--blue);
+  color:white;
+  padding:14px 0;
+  box-shadow:0 2px 6px rgba(11,78,215,0.12);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.logo{
+  font-weight:600;
+  color:white;
+  text-decoration:none;
+  font-size:18px;
+}
+.main-nav a{
+  color:white;
+  margin-left:18px;
+  text-decoration:none;
+  font-weight:500;
+}
+.main-nav a:hover{opacity:0.9}
+
+/* البانر */
+.hero{
+  background: linear-gradient(90deg, rgba(11,78,215,0.06), rgba(11,78,215,0.02));
+  padding:40px 0;
+}
+.hero .container{
+  display:flex;
+  gap:30px;
+  align-items:center;
+  justify-content:space-between;
+}
+.hero-content h1{
+  margin:0 0 10px;
+  font-size:28px;
+}
+.hero-content p{color:var(--muted); margin:0 0 16px}
+.btn{
+  display:inline-block;
+  background:var(--blue);
+  color:white;
+  padding:10px 18px;
+  border-radius:10px;
+  text-decoration:none;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+}
+.btn:hover{opacity:0.95}
+
+/* مميزات */
+.features{
+  display:flex;
+  gap:18px;
+  margin-top:18px;
+  justify-content:space-between;
+}
+.feature{
+  background:var(--card);
+  padding:18px;
+  border-radius:12px;
+  flex:1;
+  box-shadow:0 4px 14px rgba(16,24,40,0.04);
+  text-align:center;
+}
+
+/* كتب */
+.books h2{margin-top:30px; margin-bottom:14px; font-size:20px}
+.book-grid{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+}
+.book-card{
+  background:var(--card);
+  padding:12px;
+  border-radius:12px;
+  width:200px;
+  box-shadow:0 6px 18px rgba(16,24,40,0.06);
+  text-align:center;
+}
+.book-card img{width:100%; border-radius:8px}
+.book-price{font-weight:700; margin-top:8px}
+
+/* عنّا */
+.about-section{padding:40px 0}
+.lead{color:var(--muted)}
+.cards{display:flex; gap:16px; margin-top:18px}
+.info-card{flex:1; background:var(--card); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+
+/* تواصل */
+.contact-section{padding:30px 0; display:grid; grid-template-columns:1fr 320px; gap:24px}
+.contact-form{background:var(--card); padding:18px; border-radius:12px; box-shadow:0 6px 18px rgba(16,24,40,0.04)}
+.contact-form label{display:block; margin-top:8px; font-weight:600}
+.contact-form input, .contact-form textarea{
+  width:100%; padding:10px; margin-top:6px; border-radius:8px; border:1px solid #e6eefc;
+  font-family:inherit;
+}
+.form-msg{margin-top:10px; color:green; font-weight:600}
+
+/* فوتِر */
+.site-footer{
+  background:#02153a;
+  color:white;
+  padding:18px 0;
+  margin-top:30px;
+}
+.site-footer a{color:#bcd6ff; text-decoration:none}
+
+/* Responsive */
+@media (max-width:900px){
+  .hero .container{flex-direction:column; text-align:center}
+  .features{flex-direction:column}
+  .cards{flex-direction:column}
+  .contact-section{grid-template-columns:1fr}
+  .header-inner{flex-direction:column; gap:12px; align-items:flex-start}
+  .main-nav a{margin-left:10px}
+}
