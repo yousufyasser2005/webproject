@@ -1,53 +1,46 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>طلباتي - متجر الكتب المستعملة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
-            <nav class="main-nav">
-                <a href="index.html">الرئيسية</a>
-                <a href="about.html">من نحن</a>
-                <a href="contact.html" class="contact-link">تواصل معنا</a>
-                <a href="sell.html" class="contact-link">بيع</a>
-                <a href="cart.html" class="contact-link">سلة المشتريات</a>
-                <a href="checkout.html" class="contact-link">المحاسبة</a>
-                <a href="my-orders.html" class="contact-link">طلباتي</a>
-                <a href="profile.html" class="contact-link">الملف الشخصي</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">MintLib</a>
+       <nav class="main-nav">
+                <a href="about.html">About Us</a>
+                <a href="sell.html" class="contact-link">Sell</a>
+                <a href="cart.html" class="contact-link">Cart</a>
+                <a href="profile.html" class="contact-link">Profile</a>
             </nav>
-        </div>
+    </div>
     </header>
 
     <main class="container">
-        <h1>طلباتي</h1>
+        <h1>My Orders</h1>
         <table class="orders-table">
             <thead>
                 <tr>
-                    <th>رقم الطلب</th>
-                    <th>الكتب</th>
-                    <th>الإجمالي</th>
-                    <th>الحالة</th>
+                    <th>Order Number</th>
+                    <th>books</th>
+                    <th>Total</th>
+                    <th>Condition</th>
                 </tr>
             </thead>
             <tbody id="ordersList"></tbody>
         </table>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2025 متجر الكتب المستعملة — جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <p>MintLib © 2025 - All Rights Reserved</p>
+      <p><a href="contact.html">Contact Us</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
-
 </html>
