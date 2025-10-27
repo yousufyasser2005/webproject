@@ -7,14 +7,27 @@
 }
 
 /* عام */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 *{box-sizing:border-box}
 body{
+  display: flex;
+  flex-direction: column;
   margin:0;
   font-family: 'Cairo', sans-serif;
   background: #fbfcff;
   color:#0f1724;
   line-height:1.6;
 }
+main {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+}
+
 .container{
   max-width:1100px;
   margin:0 auto;
@@ -107,7 +120,7 @@ body{
   box-shadow:0 6px 18px rgba(16,24,40,0.06);
   text-align:center;
 }
-.book-card img{width:100%; border-radius:8px}
+.book-card img{width:100%; height:57%; border-radius:8px}
 .book-price{font-weight:700; margin-top:8px}
 
 /* عنّا */
@@ -126,15 +139,122 @@ body{
 }
 .form-msg{margin-top:10px; color:green; font-weight:600}
 
-/* فوتِر */
-.site-footer{
-  background:#02153a;
-  color:white;
-  padding:18px 0;
-  margin-top:30px;
+/* Form container */
+.form {
+  max-width: 520px;
+  margin: 0 auto;
+  display: grid;
+  gap: 16px;
 }
-.site-footer a{color:#bcd6ff; text-decoration:none}
 
+/* Shared control style */
+input[type="text"],
+input[type="number"],
+input[type="email"],
+select,
+.file-button {
+  display: block;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d6d9e6;
+  background: white;
+  font-size: 15px;
+  line-height: 1.2;
+  transition: box-shadow .15s ease, border-color .15s ease;
+}
+
+/* Label spacing and text */
+label { display: block; font-size: 14px; color: #222; gap:6px; }
+label > input, label > select { margin-top: 6px; }
+
+/* Focus state (keyboard accessible) */
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+select:focus,
+.file-button:focus {
+  outline: none;
+  border-color: #6b8cff;
+  box-shadow: 0 0 0 4px rgba(107,140,255,0.12);
+}
+
+/* Disabled state */
+input[disabled],
+select[disabled],
+.file-button[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Number input: remove default spinners (Chrome, Edge, Firefox) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Firefox */
+}
+
+/* File input: hide native control, style with label */
+.file-label {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+/* hide actual file input visually but keep accessible */
+.file-input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* "Choose file" button visible part */
+.file-button {
+  width: auto;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #c9cdf5;
+  background: linear-gradient(180deg,#fff,#f7f8ff);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* file name text */
+.file-name {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 6px;
+}
+
+/* Button */
+button[type="submit"] {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* فوتِر */
+footer {
+  background-color: #02153a;
+  color: white;
+  text-align: center;
+  padding: 15px 0;
+}
 /* Responsive */
 @media (max-width:900px){
   .hero .container{flex-direction:column; text-align:center}
