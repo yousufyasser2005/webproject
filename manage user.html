@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manage Users | Book Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="manage-page">
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="book">BOOK</span><span class="market">market</span>
+    </div>
+    <nav class="nav-links">
+      <a href="dashboard.html">Dashboard</a>
+      <a href="manage-books.html">Books</a>
+      <a href="manage-orders.html">Orders</a>
+      <a href="manage-users.html" class="active">Users</a>
+    </nav>
+  </header>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Manage Users</h1>
+    <p>View, edit, and manage registered users</p>
+  </section>
+
+  <!-- Users Grid -->
+  <main class="content">
+    <div class="users-grid">
+      <div class="user-card">
+        <h3>John Doe</h3>
+        <p><strong>Email:</strong> john.doe@example.com</p>
+        <p><strong>Role:</strong> Admin</p>
+        <div class="actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+
+      <div class="user-card">
+        <h3>Sarah Smith</h3>
+        <p><strong>Email:</strong> sarah.smith@example.com</p>
+        <p><strong>Role:</strong> User</p>
+        <div class="actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+
+      <div class="user-card">
+        <h3>Ahmed Hassan</h3>
+        <p><strong>Email:</strong> ahmed.hassan@example.com</p>
+        <p><strong>Role:</strong> Editor</p>
+        <div class="actions">
+          <button class="edit-btn">Edit</button>
+          <button class="delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Edit Modal -->
+  <div class="modal" id="editUserModal" aria-hidden="true">
+    <div class="modal-content">
+      <h3>Edit User</h3>
+      <form id="editUserForm" novalidate>
+        <label>Name <input type="text" id="editName" required></label>
+        <label>Email <input type="email" id="editEmail" required></label>
+        <div class="modal-actions">
+          <button type="button" id="editCancel">Cancel</button>
+          <button type="submit" class="save-btn">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

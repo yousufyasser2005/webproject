@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Dashboard | Book Market</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body class="dashboard-page">
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">
+      <span class="book">BOOK</span><span class="market">market</span>
+    </div>
+    <nav class="nav-links">
+      <a href="dashboard.html" class="active">Dashboard</a>
+      <a href="manage-books.html">Books</a>
+      <a href="manage-orders.html">Orders</a>
+      <a href="manage-users.html">Users</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Book Market</h1>
+      <p>All your books in one place</p>
+      <button class="browse-btn">Browse All Books</button>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <main class="content">
+    <section class="stats-bar">
+      <div class="stat-card">
+        <h3>📘 Books</h3>
+        <p id="booksCount"></p>
+      </div>
+      <div class="stat-card">
+        <h3>🛒 Orders</h3>
+        <p id="ordersCount"></p>
+      </div>
+      <div class="stat-card">
+        <h3>👥 Users</h3>
+        <p id="usersCount"></p>
+      </div>
+    </section>
+
+    <!-- Chart Section -->
+    <section class="chart-section">
+      <h2>Books Added Monthly</h2>
+      <canvas id="booksChart"></canvas>
+    </section>
+  </main>
+
+
+</body>
+</html>
