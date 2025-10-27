@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>تواصل معنا - متجر الكتب المستعملة</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
+      <nav class="main-nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="about.html">من نحن</a>
+        <a href="contact.html" class="contact-link">تواصل معنا</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container contact-section">
+      <h1>تواصل معنا</h1>
+      <p class="lead">لو عندك كتب للبيع أو استفسار — اكتب لنا وسنرد عليك.</p>
+
+      <form id="contactForm" class="contact-form" onsubmit="return handleContact(event)">
+        <label>الاسم</label>
+        <input type="text" id="name" placeholder="اسمك" required>
+
+        <label>البريد الإلكتروني</label>
+        <input type="email" id="email" placeholder="example@mail.com" required>
+
+        <label>رسالتك</label>
+        <textarea id="message" rows="6" placeholder="اكتب رسالتك هنا..." required></textarea>
+
+        <button type="submit" class="btn">إرسال الرسالة</button>
+
+        <p id="formMsg" class="form-msg" aria-live="polite"></p>
+      </form>
+
+      <div class="contact-info">
+        <h3>معلومات إضافية</h3>
+        <p>البريد: info@usedbooks.example</p>
+        <p>الواتساب: 01X-XXXX-XXXX</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2025 متجر الكتب المستعملة — كل الحقوق محفوظة</p>
+      <p><a href="index.html">العودة للرئيسية</a></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
