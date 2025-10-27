@@ -1,9 +1,5 @@
 // main.js
 // ===============================
-// المشروع: منصة بيع وشراء الكتب المستعملة
-// الملفات التابعة: sell-book.html, cart.html, checkout.html, my-orders.html, profile.html
-// ===============================
-
 // -------------------------------
 // بيانات المستخدم (محاكاة backend)
 // -------------------------------
@@ -29,7 +25,7 @@ function saveData() {
 // -------------------------------
 const sellForm = document.getElementById("sellForm");
 if (sellForm) {
-    sellForm.addEventListener("submit", function (e) {
+    sellForm.addEventListener("submit", function(e) {
         e.preventDefault();
 
         const name = document.getElementById("bookName").value;
@@ -50,7 +46,7 @@ if (sellForm) {
 
         books.push(newBook);
         saveData();
-        alert("تم إرسال الكتاب بنجاح للمراجعة 👌");
+        alert("Book was sent succesfully!");
         sellForm.reset();
     });
 }
@@ -65,7 +61,7 @@ if (cartContainer) {
     function renderCart() {
         cartContainer.innerHTML = "";
         if (cart.length === 0) {
-            cartContainer.innerHTML = "<p>السلة فارغة.</p>";
+            cartContainer.innerHTML = "<p>The cart is empty.</p>";
             return;
         }
         cart.forEach((item, index) => {
@@ -74,14 +70,14 @@ if (cartContainer) {
             div.innerHTML = `
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
-                <p>السعر: ${item.price} جنيه</p>
-                <button onclick="removeFromCart(${index})">حذف</button>
+                <p>Price: ${item.price} EGP</p>
+                <button onclick="removeFromCart(${index})">Delete</button>
             `;
             cartContainer.appendChild(div);
         });
     }
 
-    window.removeFromCart = function (index) {
+    window.removeFromCart = function(index) {
         cart.splice(index, 1);
         saveData();
         renderCart();
@@ -93,9 +89,9 @@ if (cartContainer) {
 // -------------------------------
 const checkoutBtn = document.getElementById("checkoutBtn");
 if (checkoutBtn) {
-    checkoutBtn.addEventListener("click", function () {
+    checkoutBtn.addEventListener("click", function() {
         if (cart.length === 0) {
-            alert("السلة فارغة!");
+            alert("Your cart is empty.");
             return;
         }
 
@@ -103,14 +99,14 @@ if (checkoutBtn) {
             id: Date.now(),
             user: currentUser ? currentUser.email : "guest",
             items: [...cart],
-            status: "قيد التنفيذ"
+            status: "In Progress"
         };
 
         orders.push(newOrder);
         cart = [];
         saveData();
 
-        alert("تم تنفيذ الطلب بنجاح ✅");
+        alert("Ordered Successfully!");
         window.location.href = "my-orders.html";
     });
 }
@@ -125,18 +121,18 @@ if (ordersContainer) {
     function renderOrders() {
         ordersContainer.innerHTML = "";
         if (orders.length === 0) {
-            ordersContainer.innerHTML = "<p>لا توجد طلبات حتى الآن.</p>";
+            ordersContainer.innerHTML = "<p>There are no orders at the moment.</p>";
             return;
         }
 
         orders.forEach(order => {
-            const div = document.createElement("div");
-            div.className = "order";
-            div.innerHTML = `
-                <h3>طلب رقم: ${order.id}</h3>
-                <p>الحالة: ${order.status}</p>
+                    const div = document.createElement("div");
+                    div.className = "order";
+                    div.innerHTML = `
+                <h3>Order Number: ${order.id}</h3>
+                <p>Condition: ${order.status}</p>
                 <ul>
-                    ${order.items.map(item => `<li>${item.name} - ${item.price} جنيه</li>`).join("")}
+                    ${order.items.map(item => `<li>${item.name} - ${item.price} EGP</li>`).join("")}
                 </ul>
             `;
             ordersContainer.appendChild(div);
@@ -159,6 +155,6 @@ if (profileContainer && currentUser) {
         currentUser.name = document.getElementById("profileName").value;
         currentUser.phone = document.getElementById("profilePhone").value;
         saveData();
-        alert("تم تحديث الملف الشخصي بنجاح ✅");
+        alert("Profile was updated successfully!");
     });
 }
