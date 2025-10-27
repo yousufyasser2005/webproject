@@ -1,72 +1,65 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
-
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>بيع كتاب - متجر الكتب المستعملة</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">📚 متجر الكتب المستعملة</a>
-             <nav class="main-nav">
-                <a href="index.html">الرئيسية</a>
-                <a href="about.html">من نحن</a>
-                <a href="contact.html" class="contact-link">تواصل معنا</a>
-                <a href="sell.html" class="contact-link">بيع</a>
-                <a href="cart.html" class="contact-link">سلة المشتريات</a>
-                <a href="checkout.html" class="contact-link">المحاسبة</a>
-                <a href="my-orders.html" class="contact-link">طلباتي</a>
-                <a href="profile.html" class="contact-link">الملف الشخصي</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">MintLib</a>
+       <nav class="main-nav">
+                <a href="about.html">About Us</a>
+                <a href="cart.html" class="contact-link">Cart</a>
+                <a href="my-orders.html" class="contact-link">My Orders</a>
+                <a href="profile.html" class="contact-link">Profile</a>
             </nav>
-        </div>
-    </header>
+    </div>
+  </header>
 
     <main class="container">
-        <h1>بيع كتابك</h1>
+        <h1>Sell Your Book</h1>
         <form id="sellForm" class="sell-form">
-            <label>اسم الكتاب:</label>
-            <input type="text" id="bookTitle" required>
+            <label>Book Title:</label>
+            <input type="text" id="bookTitle" required><br>
 
-            <label>اسم المؤلف:</label>
-            <input type="text" id="bookAuthor" required>
+            <label>Book Author:</label>
+            <input type="text" id="bookAuthor" required><br>
 
-            <label>السعر المقترح (ج.م):</label>
-            <input type="number" id="bookPrice" required>
+            <label>Requested Price (in EGP):</label>
+            <input type="number" id="bookPrice" required><br>
 
-            <label>حالة الكتاب:</label>
+            <label>Book Cover:</label>
+            <input type="file" id="bookImage" accept="image/*"><br>
+
+            <label>Book Condition:</label>
             <select id="bookCondition">
-                <option value="جديد">جديد</option>
-                <option value="كالجديد">كالجديد</option>
-                <option value="مستعمل">مستعمل</option>
-            </select>
+                <option value="New">New</option>
+                <option value="LikeNew">Like New</option>
+                <option value="Used">Used</option>
+            </select><br>
 
-            <label>صورة الغلاف:</label>
-            <input type="file" id="bookImage" accept="image/*">
-
-            <label>طريقة التسليم:</label>
+            <label>Delivery Method:</label>
             <select id="deliveryMethod">
-                <option value="تسليم في نقطة التجميع">تسليم في نقطة التجميع</option>
-                <option value="استلام من المنزل">استلام من المنزل</option>
-            </select>
+                <option value="pickupPoint">Recieve at Pickup Point</option>
+                <option value="home">Recieve at Home</option>
+            </select><br><br>
 
-            <button type="submit" class="btn">إرسال الكتاب</button>
+            <button type="submit" class="btn">Submit Book</button>
         </form>
 
         <p id="sellMessage" class="message"></p>
     </main>
 
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2025 متجر الكتب المستعملة — جميع الحقوق محفوظة</p>
-        </div>
-    </footer>
-
-    <script src="main.js"></script>
+  <footer class="site-footer">
+    <div class="container">
+      <p>MintLib © 2025 - All Rights Reserved</p>
+      <p><a href="contact.html">Contact Us</a></p>
+    </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
-
 </html>
