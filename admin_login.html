@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دخول الأدمن - مكتبة الكتب</title>
+    <style>
+        /* A simple reset and basic body styling */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #343a40; /* Dark background for admin */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        /* Store Title (light color for dark bg) */
+        .store-title {
+            font-size: 2.5rem;
+            color: #f8f9fa; /* Light color */
+            margin-bottom: 1.5rem;
+        }
+
+        /* Form Container */
+        .auth-container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #dc3545; /* Admin distinctive color */
+            font-weight: bold;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        /* Button */
+        .btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #dc3545; /* Red color for admin */
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Switch link */
+        .switch-page {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        .switch-page a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .switch-page a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="store-title">🔑 لوحة تحكم مكتبة الكتب</h1>
+
+    <div class="auth-container">
+        <h2>دخول مدير النظام (Admin)</h2>
+        <form action="#" method="POST"> <div class="form-group">
+                <label for="admin_user">اسم مستخدم الأدمن</label>
+                <input type="text" id="admin_user" name="admin_user" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="admin_pass">كلمة السر</label>
+                <input type="password" id="admin_pass" name="admin_pass" required>
+            </div>
+            
+            <button type="submit" class="btn">دخول</button>
+            
+            <div class="switch-page">
+                <a href="login.html">العودة لصفحة المستخدمين</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>
