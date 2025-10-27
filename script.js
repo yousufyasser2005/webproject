@@ -8,14 +8,14 @@ function handleContact(e){
 
   if(!name || !email || !message){
     msgEl.style.color = 'crimson';
-    msgEl.textContent = 'من فضلك املأ جميع الحقول';
+    msgEl.textContent = 'Please fill all the fields.';
     return false;
   }
 
   // هنا ممكن تبعت البيانات للـ Backend عند وجوده
   // الآن نعرض رسالة نجاح بشكل وهمي
   msgEl.style.color = 'green';
-  msgEl.textContent = 'تم استقبال رسالتك! سنرد عليك قريبًا.';
+  msgEl.textContent = 'We recieved your message! Expect a response soon.';
   
   // نعدِّل الفورم (نمسح الحقول)
   document.getElementById('contactForm').reset();
