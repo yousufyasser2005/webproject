@@ -1,49 +1,116 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Make sure the logout button fits the site theme */
+        
+        .logout-btn {
+            display: inline-block;
+            margin-top: 25px;
+            background-color: #ff4d4d;
+            color: #fff;
+            padding: 12px 28px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logout-btn:hover {
+            background-color: #d63031;
+            transform: scale(1.03);
+        }
+        
+        .profile-info {
+            margin-top: 20px;
+            font-size: 18px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 20px;
+            line-height: 1.8;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        main.container {
+            text-align: center;
+        }
+        
+        h1 {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">MintLib</a>
-       <nav class="main-nav">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">MintLib</a>
+            <nav class="main-nav">
                 <a href="about.html">About Us</a>
                 <a href="sell.html" class="contact-link">Sell</a>
                 <a href="cart.html" class="contact-link">Cart</a>
                 <a href="my-orders.html" class="contact-link">My Orders</a>
             </nav>
-    </div>
-
+        </div>
     </header>
+
     <main class="container">
         <h1>Personal Profile</h1>
-        <form id="profileForm">
-            <label>Name:</label>
-            <input type="text" id="userName" required><br>
 
-            <label>Email Address:</label>
-            <input type="email" id="userEmail" required><br>
+        <div id="profileInfo" class="profile-info">
+            <p><strong>Name:</strong> <span id="displayName"></span></p>
+            <p><strong>Email Address:</strong> <span id="displayEmail"></span></p>
+            <p><strong>Phone Number:</strong> <span id="displayPhone"></span></p>
+        </div>
 
-            <label>Phone Number:</label>
-            <input type="text" id="userPhone"><br>
-
-            <button type="submit" class="btn">Update Data</button>
-        </form>
-
-        <p id="profileMessage" class="message"></p>
+        <button id="logoutBtn" class="logout-btn">Log Out</button>
     </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>MintLib © 2025 - All Rights Reserved</p>
-      <p><a href="contact.html">Contact Us</a></p>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    <footer class="site-footer">
+        <div class="container">
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userData = JSON.parse(localStorage.getItem("user"));
+
+            // If user not logged in → redirect to login page
+            if (!userData || !userData.is_logged_in || userData.is_logged_in === false) {
+                window.location.href = "log in.html";
+                return;
+            }
+
+            // Display user info
+            document.getElementById("displayName").textContent = userData.name || "Not specified";
+            document.getElementById("displayEmail").textContent = userData.email || "Not specified";
+            document.getElementById("displayPhone").textContent = userData.phone || "Not specified";
+
+            // Logout button logic
+            document.getElementById("logoutBtn").addEventListener("click", () => {
+                const confirmLogout = confirm("Are you sure you want to log out?");
+                if (confirmLogout) {
+                    const updatedUser = {...userData,
+                        is_logged_in: false
+                    };
+                    localStorage.setItem("user", JSON.stringify(updatedUser));
+                    window.location.href = "log in.html";
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
