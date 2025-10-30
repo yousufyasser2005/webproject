@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إنشاء حساب - مكتبة الكتب</title>
+    <title>Create Account - Book Store</title>
     <style>
-        /* A simple reset and basic body styling */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
+        
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
             background-color: #f4f7f6;
             display: flex;
             flex-direction: column;
@@ -22,17 +21,14 @@
             align-items: center;
             min-height: 100vh;
             padding: 2rem 0;
-            /* Add padding for scroll on small screens */
         }
-
-        /* Store Title */
+        
         .store-title {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 1.5rem;
         }
-
-        /* Form Container */
+        
         .auth-container {
             background-color: #ffffff;
             padding: 2.5rem;
@@ -41,25 +37,24 @@
             width: 100%;
             max-width: 400px;
         }
-
+        
         .auth-container h2 {
             text-align: center;
             margin-bottom: 2rem;
             color: #333;
         }
-
-        /* Form Elements */
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
-
+        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: #555;
             font-weight: 500;
         }
-
+        
         .form-group input {
             width: 100%;
             padding: 0.8rem;
@@ -67,78 +62,138 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-
-        /* Button */
+        
         .btn {
             width: 100%;
             padding: 0.9rem;
             border: none;
             border-radius: 5px;
             background-color: #28a745;
-            /* Green color for register */
             color: white;
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
+        
         .btn:hover {
             background-color: #218838;
         }
-
-        /* Switch link */
+        
         .switch-page {
             text-align: center;
             margin-top: 1.5rem;
         }
-
+        
         .switch-page a {
             color: #007bff;
             text-decoration: none;
             font-weight: 500;
         }
-
+        
         .switch-page a:hover {
             text-decoration: underline;
+        }
+        
+        .error-message {
+            color: red;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            color: green;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
 
-    <h1 class="store-title">📚 مكتبة الكتب (Book Store)</h1>
+    <h1 class="store-title">📚 Book Store</h1>
 
     <div class="auth-container">
-        <h2>إنشاء حساب جديد</h2>
-        <form action="#" method="POST">
+        <h2>Create a New Account</h2>
+        <form id="registerForm">
             <div class="form-group">
-                <label for="name">الاسم</label>
+                <label for="name">Full Name</label>
                 <input type="text" id="name" name="name" required>
             </div>
 
             <div class="form-group">
-                <label for="email">البريد الإلكتروني</label>
+                <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" required>
             </div>
 
             <div class="form-group">
-                <label for="phone">رقم الهاتف</label>
+                <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone" required>
             </div>
 
             <div class="form-group">
-                <label for="password">كلمة السر</label>
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
-            <button type="submit" class="btn">إنشاء حساب</button>
+            <button type="submit" class="btn">Create Account</button>
 
             <div class="switch-page">
-                لديك حساب بالفعل؟ <a href="login.html">تسجيل الدخول</a>
+                Already have an account? <a href="log in.html">Log In</a>
             </div>
+
+            <p id="message" class="error-message"></p>
         </form>
     </div>
+
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const message = document.getElementById("message");
+
+            // Clear previous messages
+            message.textContent = "";
+
+            // Validate phone number
+            const phoneRegex = /^[0-9]{11}$/;
+            if (!phoneRegex.test(phone)) {
+                message.textContent = "❌ Phone number must be 11 digits and contain numbers only.";
+                return;
+            }
+
+            // Validate password (at least 8 characters, must contain letters and numbers)
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                message.textContent = "❌ Password must be at least 8 characters and include both letters and numbers.";
+                return;
+            }
+
+            // Save data to localStorage
+            const userData = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password
+            };
+
+            localStorage.setItem("user", JSON.stringify(userData));
+
+            message.className = "success-message";
+            message.textContent = "✅ Account created successfully! Redirecting...";
+
+            // Redirect after short delay
+            setTimeout(() => {
+                window.location.href = "log in.html";
+            }, 1500);
+        });
+    </script>
 
 </body>
 
