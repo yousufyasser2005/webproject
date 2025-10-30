@@ -1,83 +1,121 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* الزر الخاص بتسجيل الدخول */
+        
+        .login-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background-color: #007bff;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .login-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">MintLib</a>
-       <nav class="main-nav">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">MintLib</a>
+            <nav class="main-nav">
                 <a href="about.html">About Us</a>
                 <a href="sell.html" class="contact-link">Sell</a>
                 <a href="cart.html" class="contact-link">Cart</a>
                 <a href="my-orders.html" class="contact-link">My Orders</a>
                 <a href="profile.html" class="contact-link">Profile</a>
             </nav>
-    </div>
-
-  </header>
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <h1>YOUR ONE STOP SHOP FOR TRADING USED BOOKS</h1>
-          <p>YOU WON'T FIND A BETTER PLACE</p>
-          <a href="contact.html" class="btn">Sell Your Book</a>
         </div>
-      </div>
-    </section>
+    </header>
 
-    <section class="features container">
-      <div class="feature">
-        <h3>Quick Search</h3>
-        <p>Find your books in the most efficient way possible.</p>
-      </div>
-      <div class="feature">
-        <h3>Book Condition Check</h3>
-        <p>We check your books' condition then add a value based on the condition of said books.</p>
-      </div>
-      <div class="feature">
-        <h3>Efficient Delivery</h3>
-        <p>Delivery carrier recieves book(s), then send them to you or the person who bought your book(s).</p>
-      </div>
-    </section>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>YOUR ONE STOP SHOP FOR TRADING USED BOOKS</h1>
+                    <p>YOU WON'T FIND A BETTER PLACE</p>
+                    <a href="contact.html" class="btn">Sell Your Book</a>
+                </div>
+            </div>
+        </section>
 
-    <section class="books container">
-      <h2>Latest Arrivals</h2>
-      <div class="book-grid">
-        <div class="book-card">
-          <img src="images/goodbye-eri.jpg" alt="">
-          <h4>Goodbye, Eri</h4>
-          <p class="book-author">Tatsuki Fujimoto</p>
-          <p class="book-price">200 EGP</p>
-        </div>
-        <div class="book-card">
-          <img src="images/on-the-way-to-a-smile.jpg" alt="">
-          <h4>Final Fantasy VII: On the Way to a Smile</h4>
-          <p class="book-author">Kazushige Nojima</p>
-          <p class="book-price">1,500 EGP</p>
-        </div>
-        <div class="book-card">
-          <img src="images/harry-potter-6.jpg" alt="">
-          <h4>Harry Potter and the Half Blood Prince</h4>
-          <p class="book-author">J.K. Rowling</p>
-          <p class="book-price">125 EGP</p>
-        </div>
-      </div>
-    </section>
-  </main>
+        <section class="features container">
+            <div class="feature">
+                <h3>Quick Search</h3>
+                <p>Find your books in the most efficient way possible.</p>
+            </div>
+            <div class="feature">
+                <h3>Book Condition Check</h3>
+                <p>We check your books' condition then add a value based on the condition of said books.</p>
+            </div>
+            <div class="feature">
+                <h3>Efficient Delivery</h3>
+                <p>Delivery carrier recieves book(s), then send them to you or the person who bought your book(s).</p>
+            </div>
+        </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>MintLib © 2025 - All Rights Reserved</p>
-      <p><a href="contact.html">Contact Us</a></p>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+        <section class="books container">
+            <h2>Latest Arrivals</h2>
+            <div class="book-grid">
+                <div class="book-card">
+                    <img src="images/goodbye-eri.jpg" alt="">
+                    <h4>Goodbye, Eri</h4>
+                    <p class="book-author">Tatsuki Fujimoto</p>
+                    <p class="book-price">200 EGP</p>
+                </div>
+                <div class="book-card">
+                    <img src="images/on-the-way-to-a-smile.jpg" alt="">
+                    <h4>Final Fantasy VII: On the Way to a Smile</h4>
+                    <p class="book-author">Kazushige Nojima</p>
+                    <p class="book-price">1,500 EGP</p>
+                </div>
+                <div class="book-card">
+                    <img src="images/harry-potter-6.jpg" alt="">
+                    <h4>Harry Potter and the Half Blood Prince</h4>
+                    <p class="book-author">J.K. Rowling</p>
+                    <p class="book-price">125 EGP</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Check login status
+        const user = JSON.parse(localStorage.getItem("user"));
+        if (!user) {
+            const loginBtn = document.createElement("a");
+            loginBtn.textContent = "Log In";
+            loginBtn.href = "log in.html";
+            loginBtn.className = "login-btn";
+            document.body.appendChild(loginBtn);
+        }
+    </script>
+
+    <script src="script.js"></script>
 </body>
+
 </html>
