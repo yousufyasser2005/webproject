@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل الدخول - مكتبة الكتب</title>
+    <title>Login - Bookstore</title>
     <style>
-        /* A simple reset and basic body styling */
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background-color: #f4f7f6;
@@ -21,14 +22,12 @@
             min-height: 100vh;
         }
         
-        /* Store Title */
         .store-title {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 1.5rem;
         }
-
-        /* Form Container */
+        
         .auth-container {
             background-color: #ffffff;
             padding: 2.5rem;
@@ -37,22 +36,24 @@
             width: 100%;
             max-width: 400px;
         }
+        
         .auth-container h2 {
             text-align: center;
             margin-bottom: 2rem;
             color: #333;
         }
-
-        /* Form Elements */
+        
         .form-group {
             margin-bottom: 1.5rem;
         }
+        
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: #555;
             font-weight: 500;
         }
+        
         .form-group input {
             width: 100%;
             padding: 0.8rem;
@@ -60,8 +61,7 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-
-        /* Button */
+        
         .btn {
             width: 100%;
             padding: 0.9rem;
@@ -74,48 +74,104 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
+        
         .btn:hover {
             background-color: #0056b3;
         }
-
-        /* Switch link */
+        
         .switch-page {
             text-align: center;
             margin-top: 1.5rem;
         }
+        
         .switch-page a {
             color: #007bff;
             text-decoration: none;
             font-weight: 500;
         }
+        
         .switch-page a:hover {
             text-decoration: underline;
         }
+        
+        .error-message {
+            text-align: center;
+            color: #ff4d4d;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            display: none;
+        }
     </style>
 </head>
+
 <body>
 
-    <h1 class="store-title">📚 مكتبة الكتب (Book Store)</h1>
+    <h1 class="store-title">📚 Book Store</h1>
 
     <div class="auth-container">
-        <h2>تسجيل الدخول</h2>
-        <form action="#" method="POST"> <div class="form-group">
-                <label for="email">البريد الإلكتروني</label>
-                <input type="email" id="email" name="email" required>
-            </div>
-            
+        <h2>Login</h2>
+
+        <div id="errorMessage" class="error-message">Password or email is incorrect.</div>
+
+        <form id="loginForm">
             <div class="form-group">
-                <label for="password">كلمة السر</label>
-                <input type="password" id="password" name="password" required>
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
             </div>
-            
-            <button type="submit" class="btn">دخول</button>
-            
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="btn">Login</button>
+
             <div class="switch-page">
-                ليس لديك حساب؟ <a href="register.html">إنشاء حساب جديد</a>
+                Don’t have an account? <a href="register.html">Create one</a>
             </div>
         </form>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const existingUser = JSON.parse(localStorage.getItem("user"));
+
+            // لو المستخدم داخل بالفعل → يرجعه للصفحة الرئيسية
+            if (existingUser && existingUser.is_logged_in === true) {
+                window.location.href = "index.html";
+                return;
+            }
+
+            const loginForm = document.getElementById("loginForm");
+            const errorMessage = document.getElementById("errorMessage");
+
+            loginForm.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                // تحقق من وجود بيانات المستخدم في localStorage
+                if (!existingUser) {
+                    errorMessage.textContent = "No registered account found.";
+                    errorMessage.style.display = "block";
+                    return;
+                }
+
+                // التحقق من صحة البريد وكلمة المرور
+                if (email === existingUser.email && password === existingUser.password) {
+                    const updatedUser = {...existingUser,
+                        is_logged_in: true
+                    };
+                    localStorage.setItem("user", JSON.stringify(updatedUser));
+                    window.location.href = "index.html";
+                } else {
+                    errorMessage.textContent = "Password or email is incorrect.";
+                    errorMessage.style.display = "block";
+                }
+            });
+        });
+    </script>
 </body>
+
 </html>
