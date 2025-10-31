@@ -98,6 +98,18 @@
             document.getElementById("displayEmail").textContent = userData.email || "Not specified";
             document.getElementById("displayPhone").textContent = userData.phone || "Not specified";
 
+            // Update nav based on role
+            if (userData.role === "administrator") {
+                const nav = document.querySelector(".main-nav");
+                nav.innerHTML = `
+                    <a href="manage book.html">Manage Books</a>
+                     <a href="index.html">home</a>
+                    <a href="manage-orders.html">Manage Orders</a>
+                    <a href="manage user.html">Manage Users</a>
+                    <a href="profile.html" class="contact-link">Profile</a>
+                `;
+            }
+
             // Logout button logic
             document.getElementById("logoutBtn").addEventListener("click", () => {
                 const confirmLogout = confirm("Are you sure you want to log out?");
