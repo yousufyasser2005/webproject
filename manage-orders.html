@@ -1,62 +1,84 @@
 <!doctype html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Manage Orders | Book Market</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Manage Orders - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="manage-page">
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">
-      <span class="book">BOOK</span><span class="market">market</span>
-    </div>
-    <nav class="nav-links">
-      <a href="dashboard.html">Dashboard</a>
-      <a href="manage-books.html">Books</a>
-      <a href="manage-orders.html" class="active">Orders</a>
-      <a href="manage-users.html">Users</a>
-    </nav>
-  </header>
+    <!-- Navbar -->
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">MintLib</a>
+            <nav class="main-nav">
+                <a href="index.html">home</a>
+                <a href="manage-books.html">Manage Books</a>
+                <a href="manage-orders.html" class="active">Manage Orders</a>
+                <a href="manage-users.html">Manage Users</a>
+                <a href="profile.html" class="contact-link">Profile</a>
+            </nav>
+        </div>
+    </header>
 
-  <!-- Page Header -->
-  <section class="page-header">
-    <h1>Manage Orders</h1>
-    <p>Track and manage all customer orders efficiently</p>
-  </section>
+    <!-- Page Header -->
+    <main class="container">
+        <h1 class="page-title">Manage Orders</h1>
+        <p class="subtitle">Track and manage all customer orders efficiently</p>
 
-  <!-- Orders List -->
-  <main class="content">
-    <div class="orders-grid">
-      <!-- Example cards (can be generated dynamically) -->
-      <div class="order-card">
-        <h3>Order #1023</h3>
-        <p><strong>Customer:</strong> John Doe</p>
-        <p><strong>Book:</strong> The Alchemist</p>
-        <p><strong>Status:</strong> <span class="status shipped">Shipped</span></p>
-        <button class="view-btn">View Details</button>
-      </div>
+        <!-- Orders List -->
+        <div class="orders-grid">
+            <!-- Example cards (can be generated dynamically) -->
+            <div class="order-card">
+                <h3>Order #1023</h3>
+                <p><strong>Customer:</strong> John Doe</p>
+                <p><strong>Book:</strong> The Alchemist</p>
+                <p><strong>Status:</strong> <span class="status shipped">Shipped</span></p>
+                <button class="view-btn">View Details</button>
+            </div>
 
-      <div class="order-card">
-        <h3>Order #1024</h3>
-        <p><strong>Customer:</strong> Sarah Smith</p>
-        <p><strong>Book:</strong> Atomic Habits</p>
-        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-        <button class="view-btn">View Details</button>
-      </div>
+            <div class="order-card">
+                <h3>Order #1024</h3>
+                <p><strong>Customer:</strong> Sarah Smith</p>
+                <p><strong>Book:</strong> Atomic Habits</p>
+                <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+                <button class="view-btn">View Details</button>
+            </div>
 
-      <div class="order-card">
-        <h3>Order #1025</h3>
-        <p><strong>Customer:</strong> Ahmed Hassan</p>
-        <p><strong>Book:</strong> 1984</p>
-        <p><strong>Status:</strong> <span class="status delivered">Delivered</span></p>
-        <button class="view-btn">View Details</button>
-      </div>
-    </div>
-  </main>
+            <div class="order-card">
+                <h3>Order #1025</h3>
+                <p><strong>Customer:</strong> Ahmed Hassan</p>
+                <p><strong>Book:</strong> 1984</p>
+                <p><strong>Status:</strong> <span class="status delivered">Delivered</span></p>
+                <button class="view-btn">View Details</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userData = JSON.parse(localStorage.getItem("user"));
+
+            // If not logged in or not administrator → redirect to login page
+            if (!userData || !userData.is_logged_in || userData.is_logged_in === false || userData.role !== "administrator") {
+                window.location.href = "login.html";
+                return;
+            }
+        });
+    </script>
+
+    <script src="script.js"></script>
 
 </body>
+
 </html>
