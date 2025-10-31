@@ -112,6 +112,16 @@
             loginBtn.href = "log in.html";
             loginBtn.className = "login-btn";
             document.body.appendChild(loginBtn);
+        } else {
+            if (user.role === "administrator") {
+                const nav = document.querySelector(".main-nav");
+                nav.innerHTML = `
+                    <a href="manage book.html">Manage Books</a>
+                    <a href="manage-orders.html">Manage Orders</a>
+                    <a href="manage user.html">Manage Users</a>
+                    <a href="profile.html" class="contact-link">Profile</a>
+                `;
+            }
         }
     </script>
 
