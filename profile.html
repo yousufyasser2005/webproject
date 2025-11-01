@@ -89,7 +89,7 @@
 
             // If user not logged in → redirect to login page
             if (!userData || !userData.is_logged_in || userData.is_logged_in === false) {
-                window.location.href = "log in.html";
+                window.location.href = "login.html";
                 return;
             }
 
@@ -118,7 +118,7 @@
                         is_logged_in: false
                     };
                     localStorage.setItem("user", JSON.stringify(updatedUser));
-                    window.location.href = "log in.html";
+                    window.location.href = "login.html";
                 }
             });
         });
