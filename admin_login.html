@@ -1,122 +1,90 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دخول الأدمن - مكتبة الكتب</title>
-    <style>
-        /* A simple reset and basic body styling */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: #343a40; /* Dark background for admin */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-        
-        /* Store Title (light color for dark bg) */
-        .store-title {
-            font-size: 2.5rem;
-            color: #f8f9fa; /* Light color */
-            margin-bottom: 1.5rem;
-        }
-
-        /* Form Container */
-        .auth-container {
-            background-color: #ffffff;
-            padding: 2.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        .auth-container h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #dc3545; /* Admin distinctive color */
-            font-weight: bold;
-        }
-
-        /* Form Elements */
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: #555;
-            font-weight: 500;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 1rem;
-        }
-
-        /* Button */
-        .btn {
-            width: 100%;
-            padding: 0.9rem;
-            border: none;
-            border-radius: 5px;
-            background-color: #dc3545; /* Red color for admin */
-            color: white;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .btn:hover {
-            background-color: #c82333;
-        }
-
-        /* Switch link */
-        .switch-page {
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-        .switch-page a {
-            color: #007bff;
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .switch-page a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Admin Login | MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <h1 class="store-title">🔑 لوحة تحكم مكتبة الكتب</h1>
-
-    <div class="auth-container">
-        <h2>دخول مدير النظام (Admin)</h2>
-        <form action="#" method="POST"> <div class="form-group">
-                <label for="admin_user">اسم مستخدم الأدمن</label>
-                <input type="text" id="admin_user" name="admin_user" required>
-            </div>
-            
-            <div class="form-group">
-                <label for="admin_pass">كلمة السر</label>
-                <input type="password" id="admin_pass" name="admin_pass" required>
-            </div>
-            
-            <button type="submit" class="btn">دخول</button>
-            
-            <div class="switch-page">
-                <a href="login.html">العودة لصفحة المستخدمين</a>
-            </div>
-        </form>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📚</span>
+        MintLib
+      </a>
+      <nav class="main-nav">
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="sell.html" class="nav-link">Sell</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+        <a href="my-orders.html" class="nav-link">My Orders</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+      </nav>
     </div>
+  </header>
 
+  <main>
+    <section class="container">
+      <div class="form-container">
+        <div class="auth-header">
+          <h1 class="auth-title">Admin Access</h1>
+          <p class="auth-subtitle">MintLib Management System</p>
+        </div>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="admin_user" class="form-label">Admin Username</label>
+            <input type="text" id="admin_user" name="admin_user" class="form-input" placeholder="Enter admin username" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="admin_pass" class="form-label">Admin Password</label>
+            <input type="password" id="admin_pass" name="admin_pass" class="form-input" placeholder="Enter admin password" required>
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" style="width: 100%">Admin Login</button>
+          </div>
+          
+          <div class="auth-footer">
+            <a href="login.html" class="auth-link">← Back to User Login</a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MintLib</h3>
+          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="sell.html">Sell Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MintLib © 2025 - All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
 </html>
