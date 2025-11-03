@@ -1,128 +1,94 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>MintLib</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
-    <style>
-        /* Make sure the logout button fits the site theme */
-        
-        .logout-btn {
-            display: inline-block;
-            margin-top: 25px;
-            background-color: #ff4d4d;
-            color: #fff;
-            padding: 12px 28px;
-            font-size: 16px;
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-        }
-        
-        .logout-btn:hover {
-            background-color: #d63031;
-            transform: scale(1.03);
-        }
-        
-        .profile-info {
-            margin-top: 20px;
-            font-size: 18px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 20px;
-            line-height: 1.8;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        main.container {
-            text-align: center;
-        }
-        
-        h1 {
-            margin-bottom: 20px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Profile | MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">MintLib</a>
-            <nav class="main-nav">
-                <a href="about.html">About Us</a>
-                <a href="sell.html" class="contact-link">Sell</a>
-                <a href="cart.html" class="contact-link">Cart</a>
-                <a href="my-orders.html" class="contact-link">My Orders</a>
-            </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📚</span>
+        MintLib
+      </a>
+      <nav class="main-nav">
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="sell.html" class="nav-link">Sell</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+        <a href="my-orders.html" class="nav-link">My Orders</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">Personal Profile</h1>
+          <p class="section-subtitle">Manage your account information</p>
         </div>
-    </header>
+        <div class="form-container">
+          <form id="profileForm">
+            <div class="form-group">
+              <label for="userName" class="form-label">Name</label>
+              <input type="text" id="userName" class="form-input" placeholder="Enter your full name" required>
+            </div>
 
-    <main class="container">
-        <h1>Personal Profile</h1>
+            <div class="form-group">
+              <label for="userEmail" class="form-label">Email Address</label>
+              <input type="email" id="userEmail" class="form-input" placeholder="Enter your email" required>
+            </div>
 
-        <div id="profileInfo" class="profile-info">
-            <p><strong>Name:</strong> <span id="displayName"></span></p>
-            <p><strong>Email Address:</strong> <span id="displayEmail"></span></p>
-            <p><strong>Phone Number:</strong> <span id="displayPhone"></span></p>
+            <div class="form-group">
+              <label for="userPhone" class="form-label">Phone Number</label>
+              <input type="text" id="userPhone" class="form-input" placeholder="Enter your phone number">
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary" style="width: 100%">Update Profile</button>
+            </div>
+          </form>
+          <p id="profileMessage" class="auth-footer"></p>
         </div>
+      </div>
+    </section>
+  </main>
 
-        <button id="logoutBtn" class="logout-btn">Log Out</button>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>MintLib © 2025 - All Rights Reserved</p>
-            <p><a href="contact.html">Contact Us</a></p>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MintLib</h3>
+          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
         </div>
-    </footer>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const userData = JSON.parse(localStorage.getItem("user"));
-
-            // If user not logged in → redirect to login page
-            if (!userData || !userData.is_logged_in || userData.is_logged_in === false) {
-                window.location.href = "login.html";
-                return;
-            }
-
-            // Display user info
-            document.getElementById("displayName").textContent = userData.name || "Not specified";
-            document.getElementById("displayEmail").textContent = userData.email || "Not specified";
-            document.getElementById("displayPhone").textContent = userData.phone || "Not specified";
-
-            // Update nav based on role
-            if (userData.role === "administrator") {
-                const nav = document.querySelector(".main-nav");
-                nav.innerHTML = `
-                    <a href="manage book.html">Manage Books</a>
-                     <a href="index.html">home</a>
-                    <a href="manage-orders.html">Manage Orders</a>
-                    <a href="manage user.html">Manage Users</a>
-                    <a href="profile.html" class="contact-link">Profile</a>
-                `;
-            }
-
-            // Logout button logic
-            document.getElementById("logoutBtn").addEventListener("click", () => {
-                const confirmLogout = confirm("Are you sure you want to log out?");
-                if (confirmLogout) {
-                    const updatedUser = {...userData,
-                        is_logged_in: false
-                    };
-                    localStorage.setItem("user", JSON.stringify(updatedUser));
-                    window.location.href = "login.html";
-                }
-            });
-        });
-    </script>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="sell.html">Sell Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MintLib © 2025 - All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
+  <script src="script.js"></script>
 </body>
-
 </html>
