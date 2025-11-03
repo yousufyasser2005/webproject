@@ -3,56 +3,96 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>Contact Us | MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">MintLib</a>
-       <nav class="main-nav">
-                <a href="about.html">About Us</a>
-                <a href="sell.html" class="contact-link">Sell</a>
-                <a href="cart.html" class="contact-link">Cart</a>
-                <a href="my-orders.html" class="contact-link">My Orders</a>
-                <a href="profile.html" class="contact-link">Profile</a>
-            </nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📚</span>
+        MintLib
+      </a>
+      <nav class="main-nav">
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="sell.html" class="nav-link">Sell</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+        <a href="my-orders.html" class="nav-link">My Orders</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <a href="contact.html" class="nav-link active">Contact</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <section class="container contact-section">
-      <h1>Contact Us</h1>
-      <p class="lead">If you have any questions, comments or whatever, feel free to ask.</p>
+    <section class="container">
+      <div class="form-container">
+        <h1 class="form-title">Contact Us</h1>
+        <p class="section-subtitle" style="text-align: center; margin-bottom: 2rem;">Have books to sell or questions? Write to us and we'll get back to you.</p>
+        
+        <form id="contactForm" onsubmit="return handleContact(event)">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-input" placeholder="Your name" required>
+          </div>
 
-      <form id="contactForm" class="contact-form" onsubmit="return handleContact(event)">
-        <label>Name</label>
-        <input type="text" id="name" placeholder="Your Name" required>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-input" placeholder="example@mail.com" required>
+          </div>
 
-        <label>Email Address</label>
-        <input type="email" id="email" placeholder="example@mail.com" required>
+          <div class="form-group">
+            <label for="message" class="form-label">Your Message</label>
+            <textarea id="message" class="form-input" rows="6" placeholder="Write your message here..." required></textarea>
+          </div>
 
-        <label>Your Message</label>
-        <textarea id="message" rows="6" placeholder="Right Your Message Here" required></textarea>
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" style="width: 100%">Send Message</button>
+          </div>
 
-        <button type="submit" class="btn">Send Message</button>
+          <p id="formMsg" class="message" aria-live="polite"></p>
+        </form>
 
-        <p id="formMsg" class="form-msg" aria-live="polite"></p>
-      </form>
-
-      <div class="contact-info">
-        <h3>Contact Info</h3>
-        <p>Email: info@mintlib.notrealdomain</p>
-        <p>Whatsapp: 018-1610-1997</p>
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-light);">
+          <h3 style="margin-bottom: 1rem;">Additional Information</h3>
+          <p><strong>Email:</strong> info@mintlib.example</p>
+          <p><strong>WhatsApp:</strong> 01X-XXXX-XXXX</p>
+        </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>MintLib © 2025 - All Rights Reserved</p>
-      <p><a href="contact.html">Contact Us</a></p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MintLib</h3>
+          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="sell.html">Sell Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MintLib © 2025 - All Rights Reserved</p>
+      </div>
     </div>
   </footer>
   <script src="script.js"></script>
