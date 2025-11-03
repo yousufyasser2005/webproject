@@ -3,42 +3,87 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+  <title>My Orders | MintLib</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="container header-inner">
-      <a href="index.html" class="logo">MintLib</a>
-       <nav class="main-nav">
-                <a href="about.html">About Us</a>
-                <a href="sell.html" class="contact-link">Sell</a>
-                <a href="cart.html" class="contact-link">Cart</a>
-                <a href="profile.html" class="contact-link">Profile</a>
-            </nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📚</span>
+        MintLib
+      </a>
+      <nav class="main-nav">
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="sell.html" class="nav-link">Sell</a>
+        <a href="cart.html" class="nav-link">Cart</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+        <a href="login.html" class="nav-link">Login</a>
+      </nav>
     </div>
-    </header>
+  </header>
 
-    <main class="container">
-        <h1>My Orders</h1>
-        <table class="orders-table">
+  <main>
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">My Orders</h1>
+          <p class="section-subtitle">Track your book orders and purchases</p>
+        </div>
+        <div class="form-container">
+          <table class="data-table">
             <thead>
-                <tr>
-                    <th>Order Number</th>
-                    <th>books</th>
-                    <th>Total</th>
-                    <th>Condition</th>
-                </tr>
+              <tr>
+                <th>Order Number</th>
+                <th>Books</th>
+                <th>Total</th>
+                <th>Status</th>
+              </tr>
             </thead>
-            <tbody id="ordersList"></tbody>
-        </table>
-    </main>
+            <tbody id="ordersList">
+              <tr>
+                <td>No orders found</td>
+                <td>-</td>
+                <td>-</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <footer class="site-footer">
     <div class="container">
-      <p>MintLib © 2025 - All Rights Reserved</p>
-      <p><a href="contact.html">Contact Us</a></p>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MintLib</h3>
+          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="sell.html">Sell Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MintLib © 2025 - All Rights Reserved</p>
+      </div>
     </div>
   </footer>
   <script src="script.js"></script>
