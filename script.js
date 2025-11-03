@@ -1,27 +1,138 @@
+// Theme functionality
+function initTheme() {
+  const themeToggle = document.createElement('div');
+  themeToggle.className = 'theme-toggle';
+  themeToggle.innerHTML = `
+    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
+      <span class="theme-icon">🌙</span>
+    </button>
+  `;
+  document.body.appendChild(themeToggle);
+
+  const themeBtn = document.getElementById('themeToggle');
+  const themeIcon = themeBtn.querySelector('.theme-icon');
+  
+  // Check for saved theme or prefer color scheme
+  const savedTheme = localStorage.getItem('theme');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  
+  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    themeIcon.textContent = '☀️';
+  } else {
+    document.documentElement.setAttribute('data-theme', 'light');
+    themeIcon.textContent = '🌙';
+  }
+
+  themeBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'light');
+      themeIcon.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    } else {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = '☀️';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+}
+
+// Header scroll effect
+function initHeaderScroll() {
+  const header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      
+      if (currentScroll > 100) {
+        header.classList.add('header-scrolled');
+      } else {
+        header.classList.remove('header-scrolled');
+      }
+    });
+  }
+}
+
+// Handle book cover images for consistent sizing
+function handleBookCovers() {
+  const bookCovers = document.querySelectorAll('.book-cover img');
+  
+  bookCovers.forEach(img => {
+    // Force consistent sizing
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.objectPosition = 'center';
+    
+    img.addEventListener('error', function() {
+      this.style.display = 'none';
+      const placeholder = this.parentElement.querySelector('.book-cover-placeholder');
+      if (placeholder) {
+        placeholder.style.display = 'flex';
+      }
+    });
+    
+    // Check if image loaded successfully
+    if (img.complete && img.naturalHeight === 0) {
+      img.style.display = 'none';
+      const placeholder = img.parentElement.querySelector('.book-cover-placeholder');
+      if (placeholder) {
+        placeholder.style.display = 'flex';
+      }
+    }
+  });
+}
+
+// Contact form handler
 function handleContact(e){
   e.preventDefault();
-  // جلب القيم (لو عاوز تتوسع بعد كده)
   const name = document.getElementById('name').value.trim();
   const email = document.getElementById('email').value.trim();
   const message = document.getElementById('message').value.trim();
   const msgEl = document.getElementById('formMsg');
 
   if(!name || !email || !message){
-    msgEl.style.color = 'crimson';
+    msgEl.style.color = 'var(--error)';
     msgEl.textContent = 'Please fill all the fields.';
     return false;
   }
 
-  // هنا ممكن تبعت البيانات للـ Backend عند وجوده
-  // الآن نعرض رسالة نجاح بشكل وهمي
-  msgEl.style.color = 'green';
-  msgEl.textContent = 'We recieved your message! Expect a response soon.';
+  // Success message
+  msgEl.style.color = 'var(--success)';
+  msgEl.textContent = 'We received your message! Expect a response soon.';
   
-  // نعدِّل الفورم (نمسح الحقول)
+  // Reset form
   document.getElementById('contactForm').reset();
 
-  // نزيل الرسالة بعد 4 ثواني
-  setTimeout(()=>{ msgEl.textContent = ''; }, 4000);
+  // Remove message after 4 seconds
+  setTimeout(() => { 
+    msgEl.textContent = ''; 
+  }, 4000);
 
   return false;
 }
+
+// Initialize everything when DOM loads
+document.addEventListener('DOMContentLoaded', function() {
+  initTheme();
+  initHeaderScroll();
+  handleBookCovers();
+  
+  // Add app wrapper to all pages
+  const appWrapper = document.createElement('div');
+  appWrapper.className = 'app';
+  while (document.body.firstChild) {
+    appWrapper.appendChild(document.body.firstChild);
+  }
+  document.body.appendChild(appWrapper);
+  
+  // Add active class to current page navigation
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const navLinks = document.querySelectorAll('.nav-link');
+  navLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage) {
+      link.classList.add('active');
+    }
+  });
+});
