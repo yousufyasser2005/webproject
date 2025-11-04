@@ -226,6 +226,10 @@
 
             localStorage.setItem("users", JSON.stringify(updatedUsers));
 
+            // Store the currently logged-in user separately
+            const loggedInUser = updatedUsers.find(u => u.email === email);
+            localStorage.setItem("user", JSON.stringify(loggedInUser));
+
             message.className = "success-message";
             message.textContent = "✅ Login successful! Redirecting...";
 
