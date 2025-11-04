@@ -114,10 +114,8 @@
             document.getElementById("logoutBtn").addEventListener("click", () => {
                 const confirmLogout = confirm("Are you sure you want to log out?");
                 if (confirmLogout) {
-                    const updatedUser = {...userData,
-                        is_logged_in: false
-                    };
-                    localStorage.setItem("users", JSON.stringify(updatedUser));
+                    // Clear the logged-in user data
+                    localStorage.removeItem("user");
                     window.location.href = "login.html";
                 }
             });
