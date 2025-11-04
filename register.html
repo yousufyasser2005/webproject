@@ -1,100 +1,271 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Register | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - MintLib</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+        
+        .store-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+        
+        .auth-container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+        }
+        
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-left: 0.5rem;
+        }
+        
+        .form-group .radio-options {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .form-group .radio-options label {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 1rem;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .form-group .radio-options input[type="radio"] {
+            margin-left: 0;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background-color: #218838;
+        }
+        
+        .switch-page {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .switch-page a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .switch-page a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: red;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .success-message {
+            color: green;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        @media (max-width: 480px) {
+            .form-group .radio-options {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .form-group .radio-options label {
+                margin-left: 0;
+                margin-bottom: 0.5rem;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="sell.html" class="nav-link">Sell</a>
-        <a href="cart.html" class="nav-link">Cart</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-      </nav>
-    </div>
-  </header>
-
-  <main>
-    <section class="container">
-      <div class="form-container">
-        <div class="auth-header">
-          <h1 class="auth-title">Create Account</h1>
-          <p class="auth-subtitle">Join MintLib today</p>
-        </div>
-        <form action="#" method="POST">
-          <div class="form-group">
-            <label for="name" class="form-label">Full Name</label>
-            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your full name" required>
-          </div>
-
-          <div class="form-group">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-          </div>
-
-          <div class="form-group">
-            <label for="phone" class="form-label">Phone Number</label>
-            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Enter your phone number" required>
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" name="password" class="form-input" placeholder="Create a password" required>
-          </div>
-
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" style="width: 100%">Create Account</button>
-          </div>
-
-          <div class="auth-footer">
-            Already have an account? <a href="login.html" class="auth-link">Sign in</a>
-          </div>
+    <h1 class="store-title">📚 MintLib</h1>
+    <div class="auth-container">
+        <h2>Create a New Account</h2>
+        <form id="registerForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required>
+            </div>
+            <div class="form-group">
+                <label>Role</label>
+                <div class="radio-options">
+                    <label for="role_user">
+<input type="radio" id="role_user" name="role" value="user" required> User
+</label>
+                    <label for="role_admin">
+<input type="radio" id="role_admin" name="role" value="administrator"> Administrator
+</label>
+                </div>
+            </div>
+            <button type="submit" class="btn">Create Account</button>
+            <div class="switch-page">
+                Already have an account? <a href="log in.html">Log In</a>
+            </div>
+            <p id="message" class="error-message"></p>
         </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
     </div>
-  </footer>
-  <script src="script.js"></script>
+    <script>
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const name = document.getElementById("name").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const phone = document.getElementById("phone").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
+            const selectedRole = document.querySelector('input[name="role"]:checked');
+            const message = document.getElementById("message");
+            // Clear previous messages
+            message.textContent = "";
+            message.className = "error-message";
+            // Validate role
+            if (!selectedRole) {
+                message.textContent = "❌ Please select a role.";
+                return;
+            }
+            const role = selectedRole.value;
+            // Validate phone number
+            const phoneRegex = /^[0-9]{11}$/;
+            if (!phoneRegex.test(phone)) {
+                message.textContent = "❌ Phone number must be 11 digits and contain numbers only.";
+                return;
+            }
+            // Validate password (at least 8 characters, must contain letters and numbers)
+            const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordRegex.test(password)) {
+                message.textContent = "❌ Password must be at least 8 characters and include both letters and numbers.";
+                return;
+            }
+            // Validate confirm password
+            if (confirmPassword !== password) {
+                message.textContent = "❌ Passwords do not match.";
+                return;
+            }
+            // Retrieve existing users from localStorage
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            // Check if email already exists
+            if (users.find(user => user.email === email)) {
+                message.textContent = "❌ An account with this email already exists.";
+                return;
+            }
+            // Check if phone already exists
+            if (users.find(user => user.phone === phone)) {
+                message.textContent = "❌ An account with this phone number already exists.";
+                return;
+            }
+            // If role is administrator, check if email is an admin email
+            if (role === "administrator") {
+                let admins = JSON.parse(localStorage.getItem("admins") || "[]");
+                if (!admins.find(admin => admin.email === email)) {
+                    message.textContent = "❌ Can't register account. This email isn't an admin email.";
+                    return;
+                }
+            }
+            // Create new user
+            const userData = {
+                name: name,
+                email: email,
+                phone: phone,
+                password: password,
+                role: role,
+                is_logged_in: false
+            };
+            // Add to users array
+            users.push(userData);
+            localStorage.setItem("users", JSON.stringify(users));
+            message.className = "success-message";
+            message.textContent = "✅ Account created successfully! Redirecting...";
+            // Redirect after short delay
+            setTimeout(() => {
+                window.location.href = "log in.html";
+            }, 1500);
+        });
+    </script>
 </body>
+
 </html>
