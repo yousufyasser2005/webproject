@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up - MintLib</title>
+    <title>Log In - MintLib</title>
     <style>
         * {
             box-sizing: border-box;
@@ -98,8 +98,8 @@
 <body>
     <h1 class="store-title">📚 MintLib</h1>
     <div class="auth-container">
-        <h2>Create a New Account</h2>
-        <form id="registerForm">
+        <h2>Log In to Your Account</h2>
+        <form id="loginForm">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" required>
@@ -108,44 +108,42 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit" class="btn">Sign Up</button>
+            <button type="submit" class="btn">Sign In</button>
             <div class="switch-page">
-                Already have an account? <a href="index.html">Log In</a>
+                Don’t have an account? <a href="register.html">Create One</a>
             </div>
             <p id="message" class="error-message"></p>
         </form>
     </div>
     <script>
-        document.getElementById("registerForm").addEventListener("submit", function (event) {
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
             event.preventDefault();
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
             const message = document.getElementById("message");
             message.textContent = ""; // Clear old message
             message.className = "error-message";
-
-            if (!email || !password) {
-                message.textContent = "❌ Please fill in all fields.";
-                return;
-            }
-
             let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            // Check if user already exists
-            if (users.some(user => user.email === email)) {
-                message.textContent = "❌ An account with this email already exists.";
+            // Find user by email + password
+            let foundUser = users.find(user => user.email === email && user.password === password);
+            if (!foundUser) {
+                message.textContent = "❌ Incorrect email or password.";
                 return;
             }
-
-            // Add new user
-            const newUser = { email, password, is_logged_in: false };
-            users.push(newUser);
+            // ✅ Mark user as logged in inside users array
+            users = users.map(user => {
+                if (user.email === email) {
+                    return { ...user, is_logged_in: true };
+                }
+                return user;
+            });
             localStorage.setItem("users", JSON.stringify(users));
-
+            // ✅ Store logged-in user separately
+            localStorage.setItem("currentUser", JSON.stringify(foundUser));
             message.className = "success-message";
-            message.textContent = "✅ Account created successfully! Redirecting to login...";
+            message.textContent = "✅ Login successful! Redirecting...";
             setTimeout(() => {
-                window.location.href = "index.html"; // Assuming login is at index.html, adjust if needed
+                window.location.href = "index.html";
             }, 1200);
         });
     </script>
