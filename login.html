@@ -1,4 +1,3 @@
-ok now update this login page to be compatable with this new system.
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
@@ -187,37 +186,45 @@ ok now update this login page to be compatable with this new system.
             message.textContent = "";
             message.className = "error-message";
 
-            // Retrieve user data from localStorage
-            const storedUser = localStorage.getItem("user");
-            if (!storedUser) {
+            // Retrieve all users from localStorage
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            if (users.length === 0) {
                 message.textContent = "❌ No user data found. Please register first.";
                 return;
             }
 
-            const userData = JSON.parse(storedUser);
+            // Find the user with matching email
+            const user = users.find(u => u.email === email);
+
+            if (!user) {
+                message.textContent = "❌ Incorrect role or email or password";
+                return;
+            }
 
             // Check role match
-            if (userData.role !== selectedRole) {
-                message.textContent = "❌ Incorrect role selected.";
+            if (user.role !== selectedRole) {
+                message.textContent = "❌ Incorrect role or email or password";
                 return;
             }
 
-            // Check credentials
-            if (userData.email !== email) {
-                message.textContent = "❌ Invalid email.";
+            // Check password
+            if (user.password !== password) {
+                message.textContent = "❌ Incorrect role or email or password";
                 return;
             }
 
-            if (userData.password !== password) {
-                message.textContent = "❌ Invalid password.";
-                return;
-            }
+            // Update the user's login status in the users array
+            const updatedUsers = users.map(u => {
+                if (u.email === email) {
+                    return {...u,
+                        is_logged_in: true
+                    };
+                }
+                return u;
+            });
 
-            // Set is_logged_in to true
-            const updatedUser = {...userData,
-                is_logged_in: true
-            };
-            localStorage.setItem("user", JSON.stringify(updatedUser));
+            localStorage.setItem("users", JSON.stringify(updatedUsers));
 
             message.className = "success-message";
             message.textContent = "✅ Login successful! Redirecting...";
