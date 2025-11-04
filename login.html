@@ -1,92 +1,120 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Login | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login | MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="sell.html" class="nav-link">Sell</a>
-        <a href="cart.html" class="nav-link">Cart</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-      </nav>
-    </div>
-  </header>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span> MintLib
+            </a>
+            <nav class="main-nav">
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+                <a href="my-orders.html" class="nav-link">My Orders</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <section class="container">
-      <div class="form-container">
-        <div class="auth-header">
-          <h1 class="auth-title">Welcome Back</h1>
-          <p class="auth-subtitle">Sign in to your MintLib account</p>
-        </div>
-        <form action="#" method="GET">
+    <main>
+        <section class="container">
+            <div class="form-container">
+                <div class="auth-header">
+                    <h1 class="auth-title">Welcome Back</h1>
+                    <p class="auth-subtitle">Sign in to your MintLib account</p>
+                </div>
+                <form action="#" method="GET">
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
 
-          <div class="form-group">
-            <label for="email" class="form-label">Email Address</label>
-            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-          </div>
-          
-          <div class="form-group">
-            <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
-          </div>
-          
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" style="width: 100%">Sign In</button>
-          </div>
-          
-          <div class="auth-footer">
-            Don't have an account? <a href="register.html" class="auth-link">Create account</a>
-          </div>
-        </form>
-      </div>
-    </section>
-  </main>
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
+                    </div>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary" style="width: 100%">Sign In</button>
+                    </div>
+
+                    <div class="auth-footer">
+                        Don't have an account? <a href="register.html" class="auth-link">Create account</a>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    </footer>
+
+    <!-- ✅ JavaScript مدمج داخل الصفحة -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", function (e) {
+                e.preventDefault();
+
+                const email = document.getElementById("email").value.trim();
+                const password = document.getElementById("password").value.trim();
+
+                // قراءة بيانات المستخدم المخزنة عند التسجيل
+                const storedEmail = localStorage.getItem("userEmail");
+                const storedPassword = localStorage.getItem("userPassword");
+
+                if (email === storedEmail && password === storedPassword) {
+                    // تسجيل الدخول بنجاح
+                    localStorage.setItem("loggedIn", "true");
+                    localStorage.setItem("loggedInUser", email);
+
+                    window.location.href = "index.html"; // التحويل بعد تسجيل الدخول
+                } else {
+                    alert("❌ Incorrect email or password");
+                }
+            });
+        });
+    </script>
+
 </body>
-</html>
 
+</html>
