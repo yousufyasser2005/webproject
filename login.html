@@ -2,116 +2,176 @@
 <html lang="en" dir="ltr">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Login | MintLib</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log In - MintLib</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .store-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .auth-container {
+            background-color: #ffffff;
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .switch-page {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .switch-page a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .switch-page a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .success-message {
+            color: green;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-    <header class="site-header">
-        <div class="container header-inner">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">📚</span> MintLib
-            </a>
-            <nav class="main-nav">
-                <a href="about.html" class="nav-link">About Us</a>
-                <a href="sell.html" class="nav-link">Sell</a>
-                <a href="cart.html" class="nav-link">Cart</a>
-                <a href="my-orders.html" class="nav-link">My Orders</a>
-                <a href="profile.html" class="nav-link">Profile</a>
-            </nav>
-        </div>
-    </header>
-
-    <main>
-        <section class="container">
-            <div class="form-container">
-                <div class="auth-header">
-                    <h1 class="auth-title">Welcome Back</h1>
-                    <p class="auth-subtitle">Sign in to your MintLib account</p>
-                </div>
-                <form action="#" method="GET">
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" id="password" name="password" class="form-input" placeholder="Enter your password" required>
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" style="width: 100%">Sign In</button>
-                    </div>
-
-                    <div class="auth-footer">
-                        Don't have an account? <a href="register.html" class="auth-link">Create account</a>
-                    </div>
-                </form>
+    <h1 class="store-title">📚 MintLib</h1>
+    <div class="auth-container">
+        <h2>Log In to Your Account</h2>
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" required>
             </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>MintLib</h3>
-                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="sell.html">Sell Books</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="shipping.html">Shipping Info</a></li>
-                        <li><a href="returns.html">Returns</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
             </div>
-            <div class="footer-bottom">
-                <p>MintLib © 2025 - All Rights Reserved</p>
+            <button type="submit" class="btn">Sign In</button>
+            <div class="switch-page">
+                Don’t have an account? <a href="register.html">Create One</a>
             </div>
-        </div>
-    </footer>
+            <p id="message" class="error-message"></p>
+        </form>
+    </div>
 
-    <!-- ✅ JavaScript مدمج داخل الصفحة -->
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.querySelector("form");
+        document.getElementById("loginForm").addEventListener("submit", function (event) {
+            event.preventDefault();
 
-            form.addEventListener("submit", function (e) {
-                e.preventDefault();
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            const message = document.getElementById("message");
 
-                const email = document.getElementById("email").value.trim();
-                const password = document.getElementById("password").value.trim();
+            message.textContent = ""; // Clear old message
+            message.className = "error-message";
 
-                // قراءة بيانات المستخدم المخزنة عند التسجيل
-                const storedEmail = localStorage.getItem("userEmail");
-                const storedPassword = localStorage.getItem("userPassword");
+            let users = JSON.parse(localStorage.getItem("users")) || [];
 
-                if (email === storedEmail && password === storedPassword) {
-                    // تسجيل الدخول بنجاح
-                    localStorage.setItem("loggedIn", "true");
-                    localStorage.setItem("loggedInUser", email);
+            // Find user by email + password
+            let foundUser = users.find(user => user.email === email && user.password === password);
 
-                    window.location.href = "index.html"; // التحويل بعد تسجيل الدخول
-                } else {
-                    alert("❌ Incorrect email or password");
+            if (!foundUser) {
+                message.textContent = "❌ Incorrect email or password.";
+                return;
+            }
+
+            // ✅ Mark user as logged in inside users array
+            users = users.map(user => {
+                if (user.email === email) {
+                    return { ...user, is_logged_in: true };
                 }
+                return user;
             });
+
+            localStorage.setItem("users", JSON.stringify(users));
+
+            // ✅ Store logged-in user separately
+            localStorage.setItem("currentUser", JSON.stringify(foundUser));
+
+            message.className = "success-message";
+            message.textContent = "✅ Login successful! Redirecting...";
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1200);
         });
     </script>
 
