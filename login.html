@@ -108,9 +108,13 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
             <button type="submit" class="btn">Sign Up</button>
             <div class="switch-page">
-                Already have an account? <a href="index.html">Log In</a>
+                don't have an account? <a href="register.html">register</a>
             </div>
             <p id="message" class="error-message"></p>
         </form>
@@ -120,28 +124,28 @@
             event.preventDefault();
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
+            const confirmPassword = document.getElementById("confirmPassword").value.trim();
             const message = document.getElementById("message");
             message.textContent = ""; // Clear old message
             message.className = "error-message";
-
-            if (!email || !password) {
+            if (!email || !password || !confirmPassword) {
                 message.textContent = "❌ Please fill in all fields.";
                 return;
             }
-
+            if (password !== confirmPassword) {
+                message.textContent = "❌ Incorrect email or password.";
+                return;
+            }
             let users = JSON.parse(localStorage.getItem("users")) || [];
-
             // Check if user already exists
             if (users.some(user => user.email === email)) {
                 message.textContent = "❌ An account with this email already exists.";
                 return;
             }
-
             // Add new user
             const newUser = { email, password, is_logged_in: false };
             users.push(newUser);
             localStorage.setItem("users", JSON.stringify(users));
-
             message.className = "success-message";
             message.textContent = "✅ Account created successfully! Redirecting to login...";
             setTimeout(() => {
