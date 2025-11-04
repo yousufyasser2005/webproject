@@ -1,17 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Log In - MintLib</title>
+    <title>Sign Up - MintLib</title>
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-
         body {
             font-family: "Segoe UI", Roboto, Arial, sans-serif;
             background-color: #f4f7f6;
@@ -22,13 +20,11 @@
             min-height: 100vh;
             padding: 2rem 0;
         }
-
         .store-title {
             font-size: 2.5rem;
             color: #333;
             margin-bottom: 1.5rem;
         }
-
         .auth-container {
             background-color: #ffffff;
             padding: 2.5rem;
@@ -37,24 +33,20 @@
             width: 100%;
             max-width: 400px;
         }
-
         .auth-container h2 {
             text-align: center;
             margin-bottom: 2rem;
             color: #333;
         }
-
         .form-group {
             margin-bottom: 1.5rem;
         }
-
         .form-group label {
             display: block;
             margin-bottom: 0.5rem;
             color: #555;
             font-weight: 500;
         }
-
         .form-group input {
             width: 100%;
             padding: 0.8rem;
@@ -62,7 +54,6 @@
             border-radius: 5px;
             font-size: 1rem;
         }
-
         .btn {
             width: 100%;
             padding: 0.9rem;
@@ -75,33 +66,27 @@
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
-
         .btn:hover {
             background-color: #0056b3;
         }
-
         .switch-page {
             text-align: center;
             margin-top: 1.5rem;
         }
-
         .switch-page a {
             color: #007bff;
             text-decoration: none;
             font-weight: 500;
         }
-
         .switch-page a:hover {
             text-decoration: underline;
         }
-
         .error-message {
             color: red;
             font-size: 0.95rem;
             margin-top: 1rem;
             text-align: center;
         }
-
         .success-message {
             color: green;
             font-size: 0.95rem;
@@ -110,12 +95,11 @@
         }
     </style>
 </head>
-
 <body>
     <h1 class="store-title">📚 MintLib</h1>
     <div class="auth-container">
-        <h2>Log In to Your Account</h2>
-        <form id="loginForm">
+        <h2>Create a New Account</h2>
+        <form id="registerForm">
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" required>
@@ -124,57 +108,46 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            <button type="submit" class="btn">Sign In</button>
+            <button type="submit" class="btn">Sign Up</button>
             <div class="switch-page">
-                Don’t have an account? <a href="register.html">Create One</a>
+                Already have an account? <a href="index.html">Log In</a>
             </div>
             <p id="message" class="error-message"></p>
         </form>
     </div>
-
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function (event) {
+        document.getElementById("registerForm").addEventListener("submit", function (event) {
             event.preventDefault();
-
             const email = document.getElementById("email").value.trim();
             const password = document.getElementById("password").value.trim();
             const message = document.getElementById("message");
-
             message.textContent = ""; // Clear old message
             message.className = "error-message";
 
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-
-            // Find user by email + password
-            let foundUser = users.find(user => user.email === email && user.password === password);
-
-            if (!foundUser) {
-                message.textContent = "❌ Incorrect email or password.";
+            if (!email || !password) {
+                message.textContent = "❌ Please fill in all fields.";
                 return;
             }
 
-            // ✅ Mark user as logged in inside users array
-            users = users.map(user => {
-                if (user.email === email) {
-                    return { ...user, is_logged_in: true };
-                }
-                return user;
-            });
+            let users = JSON.parse(localStorage.getItem("users")) || [];
 
+            // Check if user already exists
+            if (users.some(user => user.email === email)) {
+                message.textContent = "❌ An account with this email already exists.";
+                return;
+            }
+
+            // Add new user
+            const newUser = { email, password, is_logged_in: false };
+            users.push(newUser);
             localStorage.setItem("users", JSON.stringify(users));
 
-            // ✅ Store logged-in user separately
-            localStorage.setItem("currentUser", JSON.stringify(foundUser));
-
             message.className = "success-message";
-            message.textContent = "✅ Login successful! Redirecting...";
-
+            message.textContent = "✅ Account created successfully! Redirecting to login...";
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "index.html"; // Assuming login is at index.html, adjust if needed
             }, 1200);
         });
     </script>
-
 </body>
-
 </html>
