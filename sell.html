@@ -6,6 +6,86 @@
   <title>Sell Your Book | MintLib</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    .sell-select {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: var(--transition);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      background-size: 16px;
+    }
+
+    .sell-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .sell-select:hover {
+      border-color: var(--border-medium);
+    }
+
+    /* Style the dropdown options */
+    .sell-select option {
+      padding: 0.75rem 1rem;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.95rem;
+    }
+
+    .sell-select option:first-child {
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+
+    .sell-select option:last-child {
+      border-bottom: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    .sell-select option:hover {
+      background: var(--bg-secondary);
+      color: var(--primary);
+    }
+
+    .sell-select option:checked {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+    }
+
+    .file-input {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--border-light);
+      border-radius: var(--radius);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-size: 1rem;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+
+    .file-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .file-input:hover {
+      border-color: var(--border-medium);
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -25,53 +105,60 @@
   </header>
 
   <main>
-    <section class="container">
-      <div class="form-container">
-        <h1 class="form-title">Sell Your Book</h1>
-        <form id="sellForm">
-          <div class="form-group">
-            <label for="bookTitle" class="form-label">Book Title</label>
-            <input type="text" id="bookTitle" class="form-input" required>
-          </div>
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h1 class="section-title">Sell Your Book</h1>
+          <p class="section-subtitle">List your book for sale and reach thousands of book lovers</p>
+        </div>
+        <div class="form-container">
+          <form id="sellForm">
+            <div class="form-group">
+              <label for="bookTitle" class="form-label">Book Title</label>
+              <input type="text" id="bookTitle" class="form-input" placeholder="Enter the book title" required>
+            </div>
 
-          <div class="form-group">
-            <label for="bookAuthor" class="form-label">Book Author</label>
-            <input type="text" id="bookAuthor" class="form-input" required>
-          </div>
+            <div class="form-group">
+              <label for="bookAuthor" class="form-label">Book Author</label>
+              <input type="text" id="bookAuthor" class="form-input" placeholder="Enter the author's name" required>
+            </div>
 
-          <div class="form-group">
-            <label for="bookPrice" class="form-label">Requested Price (in EGP)</label>
-            <input type="number" id="bookPrice" class="form-input" required>
-          </div>
+            <div class="form-group">
+              <label for="bookPrice" class="form-label">Requested Price (in EGP)</label>
+              <input type="number" id="bookPrice" class="form-input" placeholder="Enter price in EGP" min="1" required>
+            </div>
 
-          <div class="form-group">
-            <label for="bookImage" class="form-label">Book Cover</label>
-            <input type="file" id="bookImage" class="form-input" accept="image/*">
-          </div>
+            <div class="form-group">
+              <label for="bookImage" class="form-label">Book Cover</label>
+              <input type="file" id="bookImage" class="file-input" accept="image/*">
+            </div>
 
-          <div class="form-group">
-            <label for="bookCondition" class="form-label">Book Condition</label>
-            <select id="bookCondition" class="form-input">
-              <option value="New">New</option>
-              <option value="LikeNew">Like New</option>
-              <option value="Used">Used</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="bookCondition" class="form-label">Book Condition</label>
+              <select id="bookCondition" class="sell-select" required>
+                <option value="">Select book condition</option>
+                <option value="New">New</option>
+                <option value="LikeNew">Like New</option>
+                <option value="Used">Used</option>
+              </select>
+            </div>
 
-          <div class="form-group">
-            <label for="deliveryMethod" class="form-label">Delivery Method</label>
-            <select id="deliveryMethod" class="form-input">
-              <option value="pickupPoint">Receive at Pickup Point</option>
-              <option value="home">Receive at Home</option>
-            </select>
-          </div>
+            <div class="form-group">
+              <label for="deliveryMethod" class="form-label">Delivery Method</label>
+              <select id="deliveryMethod" class="sell-select" required>
+                <option value="">Select delivery method</option>
+                <option value="pickupPoint">Receive at Pickup Point</option>
+                <option value="home">Receive at Home</option>
+              </select>
+            </div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary" style="width: 100%">Submit Book</button>
-          </div>
-        </form>
+            <div class="form-actions">
+              <button type="submit" class="btn btn-primary">Submit Book</button>
+            </div>
+          </form>
 
-        <p id="sellMessage" class="message"></p>
+          <p id="sellMessage" class="auth-footer"></p>
+        </div>
       </div>
     </section>
   </main>
