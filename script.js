@@ -1,43 +1,3 @@
-// Theme functionality
-function initTheme() {
-  const themeToggle = document.createElement('div');
-  themeToggle.className = 'theme-toggle';
-  themeToggle.innerHTML = `
-    <button class="theme-btn" id="themeToggle" aria-label="Toggle theme">
-      <span class="theme-icon">🌙</span>
-    </button>
-  `;
-  document.body.appendChild(themeToggle);
-
-  const themeBtn = document.getElementById('themeToggle');
-  const themeIcon = themeBtn.querySelector('.theme-icon');
-  
-  // Check for saved theme or prefer color scheme
-  const savedTheme = localStorage.getItem('theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    themeIcon.textContent = '☀️';
-  } else {
-    document.documentElement.setAttribute('data-theme', 'light');
-    themeIcon.textContent = '🌙';
-  }
-
-  themeBtn.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    if (currentTheme === 'dark') {
-      document.documentElement.setAttribute('data-theme', 'light');
-      themeIcon.textContent = '🌙';
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      themeIcon.textContent = '☀️';
-      localStorage.setItem('theme', 'dark');
-    }
-  });
-}
-
 // Header scroll effect
 function initHeaderScroll() {
   const header = document.querySelector('.site-header');
@@ -136,3 +96,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
