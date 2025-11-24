@@ -1,41 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Admin Account</title>
+    <title>Create Admin Account - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .hidden {
+            display: none;
+        }
+        
+        .success {
+            text-align: center;
+            padding: 3rem;
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow);
+        }
+        
+        .success h2 {
+            color: var(--success);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>Create Admin Account</h1>
-
-        <div id="form-container">
-            <form id="admin-form">
-                <label for="name">Name:</label>
-                <input type="text" id="name" required>
-
-                <label for="email">Admin Email (must end with @MintLib.com):</label>
-                <input type="email" id="email" placeholder="example@MintLib.com" required>
-
-                <label for="id">ID (exactly 9 digits):</label>
-                <input type="text" id="id" maxlength="9" minlength="9" required>
-
-                <button type="submit">Add Admin</button>
-            </form>
-
-            <div id="error-msg" class="error"></div>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span>
+                MintLib
+            </a>
+            <nav class="main-nav">
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+                <a href="my-orders.html" class="nav-link">My Orders</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </nav>
         </div>
+    </header>
 
-        <div id="success-container" class="hidden">
-            <div class="success">
-                <h2>You have successfully added an admin to this website!</h2>
-                <button class="redirect-button" onclick="window.location.href='register.html'">Go to Register Account</button>
+    <main>
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title">Create Admin Account</h1>
+                    <p class="section-subtitle">Add new administrators to the MintLib platform</p>
+                </div>
+                
+                <div id="form-container">
+                    <div class="form-container">
+                        <form id="admin-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" id="name" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Admin Email (must end with @MintLib.com)</label>
+                                <input type="email" id="email" class="form-input" placeholder="example@MintLib.com" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="id" class="form-label">ID (exactly 9 digits)</label>
+                                <input type="text" id="id" class="form-input" maxlength="9" minlength="9" required>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Add Admin</button>
+                            </div>
+
+                            <div id="error-msg" class="error-message"></div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="success-container" class="hidden">
+                    <div class="success">
+                        <h2>You have successfully added an admin to this website!</h2>
+                        <button class="btn btn-primary" onclick="window.location.href='register.html'">Go to Register Account</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
             </div>
         </div>
-    </div>
+    </footer>
 
     <script>
         // Load admins from localStorage or initialize empty array
@@ -126,5 +211,4 @@
         });
     </script>
 </body>
-
 </html>
