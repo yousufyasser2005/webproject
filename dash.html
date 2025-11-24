@@ -1,61 +1,242 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Dashboard | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .stat-card {
+      background: var(--bg-primary);
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      text-align: center;
+      transition: var(--transition);
+      box-shadow: var(--shadow);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .stat-card h3 {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .stat-card p {
+      color: var(--primary);
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .chart-container {
+      background: var(--bg-primary);
+      padding: 2.5rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow);
+      margin: 3rem 0;
+    }
+
+    .chart-container h2 {
+      color: var(--text-primary);
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .admin-hero {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      padding: 4rem 0;
+      text-align: center;
+      color: white;
+    }
+
+    .admin-hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .admin-hero p {
+      font-size: 1.3rem;
+      opacity: 0.95;
+      margin-bottom: 2rem;
+    }
+  </style>
 </head>
 
-<body class="dashboard-page">
-  <!-- Navbar -->
-  <header class="navbar">
-    <div class="logo">
-      <span class="book">BOOK</span><span class="market">market</span>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <span class="logo-icon">📚</span>
+        MintLib
+      </a>
+      <nav class="main-nav">
+        <a href="manage-books.html" class="nav-link">Manage Books</a>
+        <a href="manage-orders.html" class="nav-link">Manage Orders</a>
+        <a href="manage-users.html" class="nav-link">Manage Users</a>
+        <a href="profile.html" class="nav-link">Profile</a>
+      </nav>
     </div>
-    <nav class="nav-links">
-      <a href="dashboard.html" class="active">Dashboard</a>
-      <a href="manage-books.html">Books</a>
-      <a href="manage-orders.html">Orders</a>
-      <a href="manage-users.html">Users</a>
-    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>MintLib</h1>
-      <p>All your books in one place</p>
-      <button class="browse-btn">Browse All Books</button>
+  <!-- Admin Hero Section -->
+  <section class="admin-hero">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Admin Dashboard</h1>
+        <p>Manage your book trading platform with powerful insights</p>
+        <div class="hero-actions">
+          <a href="manage-books.html" class="btn btn-primary">Manage Books</a>
+          <a href="manage-orders.html" class="btn btn-secondary">View Orders</a>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Stats Section -->
-  <main class="content">
-    <section class="stats-bar">
-      <div class="stat-card">
-        <h3>Books</h3>
-        <p id="booksCount"></p>
-      </div>
-      <div class="stat-card">
-        <h3>Orders</h3>
-        <p id="ordersCount"></p>
-      </div>
-      <div class="stat-card">
-        <h3>Users</h3>
-        <p id="usersCount"></p>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <main>
+    <section class="features">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Platform Overview</h2>
+          <p class="section-subtitle">Real-time statistics and insights about your book trading platform</p>
+        </div>
 
-    <!-- Chart Section -->
-    <section class="chart-section">
-      <h2>Books Added Monthly</h2>
-      <canvas id="booksChart"></canvas>
+        <!-- Stats Section -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <h3>Total Books</h3>
+            <p id="booksCount">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Orders</h3>
+            <p id="ordersCount">0</p>
+          </div>
+          <div class="stat-card">
+            <h3>Total Users</h3>
+            <p id="usersCount">0</p>
+          </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container">
+          <h2>Books Added Monthly</h2>
+          <canvas id="booksChart"></canvas>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>MintLib</h3>
+          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+        </div>
+        <div class="footer-section">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="sell.html">Sell Books</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Support</h3>
+          <ul class="footer-links">
+            <li><a href="help.html">Help Center</a></li>
+            <li><a href="shipping.html">Shipping Info</a></li>
+            <li><a href="returns.html">Returns</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>MintLib © 2025 - All Rights Reserved</p>
+      </div>
+    </div>
+  </footer>
 
+  <script>
+    // Sample data for demonstration
+    document.addEventListener('DOMContentLoaded', function() {
+      // Update stats
+      document.getElementById('booksCount').textContent = '1,247';
+      document.getElementById('ordersCount').textContent = '892';
+      document.getElementById('usersCount').textContent = '543';
+
+      // Chart initialization
+      const ctx = document.getElementById('booksChart').getContext('2d');
+      const booksChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [{
+            label: 'Books Added',
+            data: [65, 59, 80, 81, 56, 55, 40, 72, 88, 95, 110, 98],
+            backgroundColor: 'var(--primary)',
+            borderColor: 'var(--primary-dark)',
+            borderWidth: 1,
+            borderRadius: 8,
+            borderSkipped: false,
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              grid: {
+                color: 'var(--border-light)'
+              },
+              ticks: {
+                color: 'var(--text-secondary)'
+              }
+            },
+            x: {
+              grid: {
+                color: 'var(--border-light)'
+              },
+              ticks: {
+                color: 'var(--text-secondary)'
+              }
+            }
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>
