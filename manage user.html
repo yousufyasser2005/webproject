@@ -1,65 +1,209 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Manage Users | MintLib</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .users-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+
+        .user-card {
+            background: var(--bg-primary);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .user-card h3 {
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .user-card p {
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .user-card strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .edit-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .delete-btn {
+            background: var(--error);
+            color: white;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            padding: 2.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-xl);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal-content h3 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .save-btn {
+            background: var(--success);
+            color: white;
+        }
+    </style>
 </head>
 
-<body class="manage-page">
-    <!-- Navbar -->
+<body>
+    <!-- Header -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="index.html" class="logo">MintLib</a>
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span>
+                MintLib
+            </a>
             <nav class="main-nav">
-                <a href="index.html">home</a>
-                <a href="manage-books.html">Manage Books</a>
-                <a href="manage-orders.html">Manage Orders</a>
-                <a href="profile.html" class="contact-link">Profile</a>
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="manage-books.html" class="nav-link">Manage Books</a>
+                <a href="manage-orders.html" class="nav-link">Manage Orders</a>
+                <a href="manage-users.html" class="nav-link active">Manage Users</a>
+                <a href="profile.html" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
 
-    <!-- Page Header -->
-    <main class="container">
-        <h1 class="page-title">Manage Users</h1>
-        <p class="subtitle">View, edit, and manage registered users</p>
+    <!-- Main Content -->
+    <main>
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h1 class="section-title">Manage Users</h1>
+                    <p class="section-subtitle">View, edit, and manage registered users on the platform</p>
+                </div>
 
-        <!-- Users Grid -->
-        <div class="users-grid">
-            <div class="user-card">
-                <h3>John Doe</h3>
-                <p><strong>Email:</strong> john.doe@example.com</p>
-                <p><strong>Role:</strong> Admin</p>
-                <div class="actions">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
+                <!-- Users Grid -->
+                <div class="users-grid">
+                    <div class="user-card">
+                        <h3>John Doe</h3>
+                        <p><strong>Email:</strong> john.doe@example.com</p>
+                        <p><strong>Role:</strong> Admin</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="user-card">
+                        <h3>Sarah Smith</h3>
+                        <p><strong>Email:</strong> sarah.smith@example.com</p>
+                        <p><strong>Role:</strong> User</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="user-card">
+                        <h3>Ahmed Hassan</h3>
+                        <p><strong>Email:</strong> ahmed.hassan@example.com</p>
+                        <p><strong>Role:</strong> Editor</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="user-card">
+                        <h3>Maria Garcia</h3>
+                        <p><strong>Email:</strong> maria.garcia@example.com</p>
+                        <p><strong>Role:</strong> User</p>
+                        <p><strong>Status:</strong> Inactive</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="user-card">
+                        <h3>David Chen</h3>
+                        <p><strong>Email:</strong> david.chen@example.com</p>
+                        <p><strong>Role:</strong> User</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
+
+                    <div class="user-card">
+                        <h3>Emma Wilson</h3>
+                        <p><strong>Email:</strong> emma.wilson@example.com</p>
+                        <p><strong>Role:</strong> Moderator</p>
+                        <p><strong>Status:</strong> Active</p>
+                        <div class="user-actions">
+                            <button class="btn edit-btn">Edit</button>
+                            <button class="btn delete-btn">Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <div class="user-card">
-                <h3>Sarah Smith</h3>
-                <p><strong>Email:</strong> sarah.smith@example.com</p>
-                <p><strong>Role:</strong> User</p>
-                <div class="actions">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
-                </div>
-            </div>
-
-            <div class="user-card">
-                <h3>Ahmed Hassan</h3>
-                <p><strong>Email:</strong> ahmed.hassan@example.com</p>
-                <p><strong>Role:</strong> Editor</p>
-                <div class="actions">
-                    <button class="edit-btn">Edit</button>
-                    <button class="delete-btn">Delete</button>
-                </div>
-            </div>
-        </div>
+        </section>
     </main>
 
     <!-- Edit Modal -->
@@ -67,20 +211,61 @@
         <div class="modal-content">
             <h3>Edit User</h3>
             <form id="editUserForm" novalidate>
-                <label>Name <input type="text" id="editName" required></label>
-                <label>Email <input type="email" id="editEmail" required></label>
+                <div class="form-group">
+                    <label for="editName" class="form-label">Name</label>
+                    <input type="text" id="editName" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail" class="form-label">Email</label>
+                    <input type="email" id="editEmail" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <label for="editRole" class="form-label">Role</label>
+                    <select id="editRole" class="form-input" required>
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                        <option value="moderator">Moderator</option>
+                        <option value="editor">Editor</option>
+                    </select>
+                </div>
                 <div class="modal-actions">
-                    <button type="button" id="editCancel">Cancel</button>
-                    <button type="submit" class="save-btn">Save</button>
+                    <button type="button" class="btn btn-secondary" id="editCancel">Cancel</button>
+                    <button type="submit" class="btn save-btn">Save Changes</button>
                 </div>
             </form>
         </div>
     </div>
 
+    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <p>MintLib © 2025 - All Rights Reserved</p>
-            <p><a href="contact.html">Contact Us</a></p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
+            </div>
         </div>
     </footer>
 
@@ -95,9 +280,6 @@
             }
         });
     </script>
-
-    <script src="script.js"></script>
-
 </body>
 
 </html>
