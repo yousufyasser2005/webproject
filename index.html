@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib - Your One Stop Shop For Trading Used Books</title>
+  <title>MintLib - Your Book Trading Platform</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -24,46 +24,52 @@
       </nav>
     </div>
   </header>
+
   <main>
     <section class="hero">
       <div class="container">
         <div class="hero-content">
-          <span class="hero-badge">✨ Trusted by Book Lovers Worldwide</span>
+          <div class="hero-badge">
+            <span>✨</span>
+            Trusted by Book Lovers Worldwide
+          </div>
           <h1 class="hero-title">Your One Stop Shop For Trading Used Books</h1>
           <p class="hero-subtitle">Discover, trade, and fall in love with books again. You won't find a better place for your literary adventures.</p>
-          <div class="hero-buttons">
+          <div class="hero-actions">
             <a href="sell.html" class="btn btn-primary">Sell Your Book</a>
-            <a href="browse.html" class="btn btn-secondary">Browse Collection</a>
+            <a href="#books" class="btn btn-secondary">Browse Collection</a>
           </div>
         </div>
       </div>
     </section>
+
     <section class="features">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Why Choose MintLib?</h2>
           <p class="section-subtitle">We make book trading simple, secure, and rewarding for everyone</p>
         </div>
-        <div class="feature-grid">
+        <div class="features-grid">
           <div class="feature-card">
             <div class="feature-icon">🔍</div>
-            <h3 class="feature-title">Quick Search</h3>
-            <p class="feature-description">Find your books in the most efficient way possible with our advanced search and filtering system.</p>
+            <h3>Quick Search</h3>
+            <p>Find your books in the most efficient way possible with our advanced search and filtering system.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">✅</div>
-            <h3 class="feature-title">Book Condition Check</h3>
-            <p class="feature-description">We check your books' condition then add a value based on the condition of said books to ensure fair pricing.</p>
+            <h3>Book Condition Check</h3>
+            <p>We check your books' condition then add a value based on the condition of said books to ensure fair pricing.</p>
           </div>
           <div class="feature-card">
             <div class="feature-icon">🚚</div>
-            <h3 class="feature-title">Efficient Delivery</h3>
-            <p class="feature-description">Delivery carrier receives book(s), then sends them to you or the person who bought your book(s) quickly and safely.</p>
+            <h3>Efficient Delivery</h3>
+            <p>Delivery carrier receives book(s), then sends them to you or the person who bought your book(s) quickly and safely.</p>
           </div>
         </div>
       </div>
     </section>
-    <section class="books">
+
+    <section class="books" id="books">
       <div class="container">
         <div class="section-header">
           <h2 class="section-title">Latest Arrivals</h2>
@@ -71,45 +77,67 @@
         </div>
         <div class="book-grid">
           <div class="book-card">
-            <div class="book-image">
-              <img src="goodbye-eri.jpg" alt="Goodbye, Eri">
-              <span class="book-badge book-badge-new">New</span>
+            <div class="book-cover-container">
+              <div class="book-cover">
+                <img src="images/goodbye-eri.jpg" alt="Goodbye, Eri" onerror="this.style.display='none'">
+                <div class="book-cover-placeholder" style="display: none;">Goodbye, Eri</div>
+              </div>
+              <div class="book-status new">New</div>
             </div>
             <div class="book-info">
               <h3 class="book-title">Goodbye, Eri</h3>
               <p class="book-author">Tatsuki Fujimoto</p>
-              <p class="book-price">200 EGP</p>
-              <button onclick="addToCart('Goodbye, Eri', 200, 'New', 'Tatsuki Fujimoto')" class="btn btn-primary btn-small">Add to Cart</button>
+              <div class="book-meta">
+                <span class="book-price">200 EGP</span>
+                <div class="book-actions">
+                  <button class="action-btn">Add to Cart</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="book-card">
-            <div class="book-image">
-              <img src="ff7.jpg" alt="Final Fantasy VII">
-              <span class="book-badge book-badge-new">New</span>
+            <div class="book-cover-container">
+              <div class="book-cover">
+                <img src="images/on-the-way-to-a-smile.jpg" alt="Final Fantasy VII: On the Way to a Smile" onerror="this.style.display='none'">
+                <div class="book-cover-placeholder" style="display: none;">Final Fantasy VII</div>
+              </div>
+              <div class="book-status new">New</div>
             </div>
             <div class="book-info">
               <h3 class="book-title">Final Fantasy VII: On the Way to a Smile</h3>
               <p class="book-author">Kazushige Nojima</p>
-              <p class="book-price">1,500 EGP</p>
-              <button onclick="addToCart('Final Fantasy VII: On the Way to a Smile', 1500, 'New', 'Kazushige Nojima')" class="btn btn-primary btn-small">Add to Cart</button>
+              <div class="book-meta">
+                <span class="book-price">1,500 EGP</span>
+                <div class="book-actions">
+                  <button class="action-btn">Add to Cart</button>
+                </div>
+              </div>
             </div>
           </div>
           <div class="book-card">
-            <div class="book-image">
-              <img src="harry-potter.jpg" alt="Harry Potter">
-              <span class="book-badge book-badge-used">Used</span>
+            <div class="book-cover-container">
+              <div class="book-cover">
+                <img src="images/harry-potter-6.jpg" alt="Harry Potter and the Half Blood Prince" onerror="this.style.display='none'">
+                <div class="book-cover-placeholder" style="display: none;">Harry Potter</div>
+              </div>
+              <div class="book-status">Used</div>
             </div>
             <div class="book-info">
               <h3 class="book-title">Harry Potter and the Half Blood Prince</h3>
               <p class="book-author">J.K. Rowling</p>
-              <p class="book-price">125 EGP</p>
-              <button onclick="addToCart('Harry Potter and the Half Blood Prince', 125, 'Used', 'J.K. Rowling')" class="btn btn-primary btn-small">Add to Cart</button>
+              <div class="book-meta">
+                <span class="book-price">125 EGP</span>
+                <div class="book-actions">
+                  <button class="action-btn">Add to Cart</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
   </main>
+
   <footer class="site-footer">
     <div class="container">
       <div class="footer-content">
