@@ -1,174 +1,196 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MintLib - Your Book Trading Platform</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>MintLib - Your Book Trading Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .book-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .book-cover-container {
+            position: relative;
+        }
+    </style>
 </head>
+
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="sell.html" class="nav-link">Sell</a>
-        <a href="cart.html" class="nav-link">Cart</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-        <a href="login.html" class="nav-link">Login</a>
-      </nav>
-    </div>
-  </header>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span> MintLib
+            </a>
+            <nav class="main-nav">
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+                <a href="my-orders.html" class="nav-link">My Orders</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </nav>
+        </div>
+    </header>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-badge">
-            <span>✨</span>
-            Trusted by Book Lovers Worldwide
-          </div>
-          <h1 class="hero-title">Your One Stop Shop For Trading Used Books</h1>
-          <p class="hero-subtitle">Discover, trade, and fall in love with books again. You won't find a better place for your literary adventures.</p>
-          <div class="hero-actions">
-            <a href="sell.html" class="btn btn-primary">Sell Your Book</a>
-            <a href="#books" class="btn btn-secondary">Browse Collection</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="features">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Why Choose MintLib?</h2>
-          <p class="section-subtitle">We make book trading simple, secure, and rewarding for everyone</p>
-        </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <div class="feature-icon">🔍</div>
-            <h3>Quick Search</h3>
-            <p>Find your books in the most efficient way possible with our advanced search and filtering system.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">✅</div>
-            <h3>Book Condition Check</h3>
-            <p>We check your books' condition then add a value based on the condition of said books to ensure fair pricing.</p>
-          </div>
-          <div class="feature-card">
-            <div class="feature-icon">🚚</div>
-            <h3>Efficient Delivery</h3>
-            <p>Delivery carrier receives book(s), then sends them to you or the person who bought your book(s) quickly and safely.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="books" id="books">
-      <div class="container">
-        <div class="section-header">
-          <h2 class="section-title">Latest Arrivals</h2>
-          <p class="section-subtitle">Discover recently added books from our community</p>
-        </div>
-        <div class="book-grid">
-          <div class="book-card">
-            <div class="book-cover-container">
-              <div class="book-cover">
-                <img src="images/goodbye-eri.jpg" alt="Goodbye, Eri" onerror="this.style.display='none'">
-                <div class="book-cover-placeholder" style="display: none;">Goodbye, Eri</div>
-              </div>
-              <div class="book-status new">New</div>
-            </div>
-            <div class="book-info">
-              <h3 class="book-title">Goodbye, Eri</h3>
-              <p class="book-author">Tatsuki Fujimoto</p>
-              <div class="book-meta">
-                <span class="book-price">200 EGP</span>
-                <div class="book-actions">
-                  <button class="action-btn">Add to Cart</button>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span>✨</span> Trusted by Book Lovers Worldwide
+                    </div>
+                    <h1 class="hero-title">Your One Stop Shop For Trading Used Books</h1>
+                    <p class="hero-subtitle">Discover, trade, and fall in love with books again. You won't find a better place for your literary adventures.</p>
+                    <div class="hero-actions">
+                        <a href="sell.html" class="btn btn-primary">Sell Your Book</a>
+                        <a href="#books" class="btn btn-secondary">Browse Collection</a>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="book-card">
-            <div class="book-cover-container">
-              <div class="book-cover">
-                <img src="images/on-the-way-to-a-smile.jpg" alt="Final Fantasy VII: On the Way to a Smile" onerror="this.style.display='none'">
-                <div class="book-cover-placeholder" style="display: none;">Final Fantasy VII</div>
-              </div>
-              <div class="book-status new">New</div>
-            </div>
-            <div class="book-info">
-              <h3 class="book-title">Final Fantasy VII: On the Way to a Smile</h3>
-              <p class="book-author">Kazushige Nojima</p>
-              <div class="book-meta">
-                <span class="book-price">1,500 EGP</span>
-                <div class="book-actions">
-                  <button class="action-btn">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="book-card">
-            <div class="book-cover-container">
-              <div class="book-cover">
-                <img src="images/harry-potter-6.jpg" alt="Harry Potter and the Half Blood Prince" onerror="this.style.display='none'">
-                <div class="book-cover-placeholder" style="display: none;">Harry Potter</div>
-              </div>
-              <div class="book-status">Used</div>
-            </div>
-            <div class="book-info">
-              <h3 class="book-title">Harry Potter and the Half Blood Prince</h3>
-              <p class="book-author">J.K. Rowling</p>
-              <div class="book-meta">
-                <span class="book-price">125 EGP</span>
-                <div class="book-actions">
-                  <button class="action-btn">Add to Cart</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
+        </section>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+        <section class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Why Choose MintLib?</h2>
+                    <p class="section-subtitle">We make book trading simple, secure, and rewarding for everyone</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Quick Search</h3>
+                        <p>Find your books in the most efficient way possible with our advanced search and filtering system.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">✅</div>
+                        <h3>Book Condition Check</h3>
+                        <p>We check your books' condition then add a value based on the condition of said books to ensure fair pricing.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚚</div>
+                        <h3>Efficient Delivery</h3>
+                        <p>Delivery carrier receives book(s), then sends them to you or the person who bought your book(s) quickly and safely.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="books" id="books">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Latest Arrivals</h2>
+                    <p class="section-subtitle">Discover recently added books from our community</p>
+                </div>
+                <div class="book-grid">
+                    <div class="book-card" onclick="window.location.href='book details.html?id=1'">
+                        <div class="book-cover-container">
+                            <div class="book-cover">
+                                <img src="images/goodbye-eri.jpg" alt="Goodbye, Eri" onerror="this.style.display='none'">
+                                <div class="book-cover-placeholder" style="display: none;">Goodbye, Eri</div>
+                            </div>
+                            <div class="book-status new">New</div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Goodbye, Eri</h3>
+                            <p class="book-author">Tatsuki Fujimoto</p>
+                            <div class="book-meta">
+                                <span class="book-price">200 EGP</span>
+                                <div class="book-actions">
+                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(1)">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book-card" onclick="window.location.href='book details.html?id=2'">
+                        <div class="book-cover-container">
+                            <div class="book-cover">
+                                <img src="images/on-the-way-to-a-smile.jpg" alt="Final Fantasy VII: On the Way to a Smile" onerror="this.style.display='none'">
+                                <div class="book-cover-placeholder" style="display: none;">Final Fantasy VII</div>
+                            </div>
+                            <div class="book-status new">New</div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Final Fantasy VII: On the Way to a Smile</h3>
+                            <p class="book-author">Kazushige Nojima</p>
+                            <div class="book-meta">
+                                <span class="book-price">1,500 EGP</span>
+                                <div class="book-actions">
+                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(2)">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="book-card" onclick="window.location.href='book details.html?id=3'">
+                        <div class="book-cover-container">
+                            <div class="book-cover">
+                                <img src="images/harry-potter-6.jpg" alt="Harry Potter and the Half Blood Prince" onerror="this.style.display='none'">
+                                <div class="book-cover-placeholder" style="display: none;">Harry Potter</div>
+                            </div>
+                            <div class="book-status">Used</div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">Harry Potter and the Half Blood Prince</h3>
+                            <p class="book-author">J.K. Rowling</p>
+                            <div class="book-meta">
+                                <span class="book-price">125 EGP</span>
+                                <div class="book-actions">
+                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(3)">Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    </footer>
+    <script>
+        function addToCart(bookId) {
+            // Redirect to cart page
+            window.location.href = 'cart.html';
+        }
+    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
