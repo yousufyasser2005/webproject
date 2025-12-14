@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Book Details - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .book-detail-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+        
+        .book-detail-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .book-detail-image {
+            position: sticky;
+            top: 2rem;
+            height: fit-content;
+        }
+        
+        .book-detail-cover {
+            width: 100%;
+            aspect-ratio: 2/3;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .book-detail-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .book-detail-cover-placeholder {
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .book-detail-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .book-detail-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #f0f9ff;
+            color: #0369a1;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            width: fit-content;
+        }
+        
+        .book-detail-badge.used {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        
+        .book-detail-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            line-height: 1.2;
+            margin: 0;
+        }
+        
+        .book-detail-author {
+            font-size: 1.25rem;
+            color: #64748b;
+            margin: 0;
+        }
+        
+        .book-detail-price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin: 1rem 0;
+        }
+        
+        .book-detail-section {
+            padding: 1.5rem 0;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .book-detail-section:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+        
+        .book-detail-section h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 0 0 1rem 0;
+        }
+        
+        .book-detail-section p {
+            color: #475569;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .book-detail-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .book-info-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+        
+        .book-info-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 500;
+        }
+        
+        .book-info-value {
+            font-size: 1rem;
+            color: #1e293b;
+            font-weight: 600;
+        }
+        
+        .book-detail-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn-large {
+            padding: 1rem 2rem;
+            font-size: 1.125rem;
+            flex: 1;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+        
+        .breadcrumb a {
+            color: #6366f1;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .breadcrumb a:hover {
+            color: #4f46e5;
+        }
+        
+        .breadcrumb span {
+            color: #cbd5e1;
+        }
+        
+        .book-status-images {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .status-image {
+            width: 100%;
+            aspect-ratio: 4/3;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #f1f5f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .status-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .no-images-message {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem 2rem;
+            background: #f8fafc;
+            border-radius: 8px;
+            border: 2px dashed #cbd5e1;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+        
+        .no-images-message::before {
+            content: "📷";
+            display: block;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        @media (max-width: 768px) {
+            .book-detail-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .book-detail-image {
+                position: relative;
+                top: 0;
+            }
+            .book-detail-title {
+                font-size: 2rem;
+            }
+            .book-detail-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .book-detail-actions {
+                flex-direction: column;
+            }
+            .book-status-images {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span> MintLib
+            </a>
+            <nav class="main-nav">
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+                <a href="my-orders.html" class="nav-link">My Orders</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="book-detail-container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span>›</span>
+                <span id="breadcrumb-title">Book Details</span>
+            </div>
+
+            <div class="book-detail-grid">
+                <div class="book-detail-image">
+                    <div class="book-detail-cover">
+                        <img id="detail-image" src="" alt="">
+                        <div id="detail-placeholder" class="book-detail-cover-placeholder" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div class="book-detail-content">
+                    <div id="detail-badge" class="book-detail-badge"></div>
+                    <h1 id="detail-title" class="book-detail-title"></h1>
+                    <p id="detail-author" class="book-detail-author"></p>
+                    <div id="detail-price" class="book-detail-price"></div>
+
+                    <div class="book-detail-section">
+                        <h3>About This Book</h3>
+                        <p id="detail-description"></p>
+                    </div>
+
+                    <div class="book-detail-section">
+                        <h3>Book Information</h3>
+                        <div class="book-detail-info-grid">
+                            <div class="book-info-item">
+                                <span class="book-info-label">Condition</span>
+                                <span id="detail-condition" class="book-info-value"></span>
+                            </div>
+                            <div class="book-info-item">
+                                <span class="book-info-label">Language</span>
+                                <span class="book-info-value">English</span>
+                            </div>
+                            <div class="book-info-item">
+                                <span class="book-info-label">Format</span>
+                                <span class="book-info-value">Paperback</span>
+                            </div>
+                            <div class="book-info-item">
+                                <span class="book-info-label">Availability</span>
+                                <span class="book-info-value">In Stock</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-detail-section">
+                        <h3>Book Status Images</h3>
+                        <div id="status-images-container" class="book-status-images">
+                            <div class="no-images-message">
+                                No preview images available for this book
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-detail-actions">
+                        <button class="btn btn-primary btn-large" onclick="addToCart()">Add to Cart</button>
+                        <button class="btn btn-secondary btn-large" onclick="window.location.href='index.html#books'">Browse More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Book data
+        const books = [{
+            id: 1,
+            title: "Goodbye, Eri",
+            author: "Tatsuki Fujimoto",
+            price: "200 EGP",
+            image: "images/goodbye-eri.jpg",
+            condition: "New",
+            description: "A poignant and visually stunning manga that explores themes of loss, memory, and the power of storytelling. Tatsuki Fujimoto delivers an emotionally resonant narrative that blends reality and fiction in unexpected ways. This unique story follows a young filmmaker's journey through grief and creativity, told through Fujimoto's distinctive artistic style.",
+            statusImages: [] // No status images provided
+        }, {
+            id: 2,
+            title: "Final Fantasy VII: On the Way to a Smile",
+            author: "Kazushige Nojima",
+            price: "1,500 EGP",
+            image: "images/on-the-way-to-a-smile.jpg",
+            condition: "New",
+            description: "A collection of short stories that bridges the gap between Final Fantasy VII and Advent Children. Written by the scenario writer of the original game, these stories provide deeper insight into the beloved characters' lives after the main events. Explore the untold stories of Cloud, Tifa, Barret, and others as they navigate a world recovering from catastrophe.",
+            statusImages: [] // No status images provided
+        }, {
+            id: 3,
+            title: "Harry Potter and the Half Blood Prince",
+            author: "J.K. Rowling",
+            price: "125 EGP",
+            image: "images/harry-potter-6.jpg",
+            condition: "Used",
+            description: "The sixth installment in the beloved Harry Potter series takes readers deeper into the wizarding world's darkest secrets. As Lord Voldemort tightens his grip on both the Muggle and wizarding worlds, Harry discovers an old book marked as 'the property of the Half-Blood Prince' that helps him excel in Potions class. With Dumbledore's private lessons revealing crucial information about Voldemort's past, Harry prepares for the ultimate confrontation.",
+            statusImages: [] // No status images provided
+        }];
+
+        // Get book ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const bookId = parseInt(urlParams.get('id'));
+
+        // Find the book
+        const book = books.find(b => b.id === bookId);
+
+        if (book) {
+            // Update page content
+            document.getElementById('detail-title').textContent = book.title;
+            document.getElementById('detail-author').textContent = 'by ' + book.author;
+            document.getElementById('detail-price').textContent = book.price;
+            document.getElementById('detail-description').textContent = book.description;
+            document.getElementById('detail-condition').textContent = book.condition;
+            document.getElementById('breadcrumb-title').textContent = book.title;
+
+            // Update badge
+            const badge = document.getElementById('detail-badge');
+            badge.textContent = book.condition;
+            if (book.condition === 'Used') {
+                badge.classList.add('used');
+            }
+
+            // Update book cover image
+            const img = document.getElementById('detail-image');
+            const placeholder = document.getElementById('detail-placeholder');
+
+            img.onload = function() {
+                img.style.display = 'block';
+                placeholder.style.display = 'none';
+            };
+
+            img.onerror = function() {
+                img.style.display = 'none';
+                placeholder.style.display = 'flex';
+                placeholder.textContent = book.title;
+            };
+
+            img.src = book.image;
+            img.alt = book.title;
+
+            // Update status images
+            const statusImagesContainer = document.getElementById('status-images-container');
+            if (book.statusImages && book.statusImages.length > 0) {
+                statusImagesContainer.innerHTML = '';
+                book.statusImages.forEach(imageSrc => {
+                    const imageDiv = document.createElement('div');
+                    imageDiv.className = 'status-image';
+                    const imageEl = document.createElement('img');
+                    imageEl.src = imageSrc;
+                    imageEl.alt = 'Book condition photo';
+                    imageDiv.appendChild(imageEl);
+                    statusImagesContainer.appendChild(imageDiv);
+                });
+            } else {
+                // Keep the default "no images" message
+                statusImagesContainer.innerHTML = `
+                    <div class="no-images-message">
+                        No preview images available for this book
+                    </div>
+                `;
+            }
+
+            // Update page title
+            document.title = book.title + ' - MintLib';
+        } else {
+            // Redirect to home if book not found
+            window.location.href = 'index.html';
+        }
+
+        function addToCart() {
+            // Redirect to cart page
+            window.location.href = 'cart.html';
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
