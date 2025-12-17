@@ -1,5 +1,7 @@
 // main.js
 // ===============================
+
+
 // -------------------------------
 // بيانات المستخدم (محاكاة backend)
 // -------------------------------
@@ -46,7 +48,7 @@ if (sellForm) {
 
         books.push(newBook);
         saveData();
-        alert("Book was sent succesfully!");
+        alert("تم إرسال الكتاب بنجاح للمراجعة 👌");
         sellForm.reset();
     });
 }
@@ -61,7 +63,7 @@ if (cartContainer) {
     function renderCart() {
         cartContainer.innerHTML = "";
         if (cart.length === 0) {
-            cartContainer.innerHTML = "<p>The cart is empty.</p>";
+            cartContainer.innerHTML = "<p>السلة فارغة.</p>";
             return;
         }
         cart.forEach((item, index) => {
@@ -70,8 +72,8 @@ if (cartContainer) {
             div.innerHTML = `
                 <img src="${item.image}" alt="${item.name}">
                 <h3>${item.name}</h3>
-                <p>Price: ${item.price} EGP</p>
-                <button onclick="removeFromCart(${index})">Delete</button>
+                <p>السعر: ${item.price} جنيه</p>
+                <button onclick="removeFromCart(${index})">حذف</button>
             `;
             cartContainer.appendChild(div);
         });
@@ -91,7 +93,7 @@ const checkoutBtn = document.getElementById("checkoutBtn");
 if (checkoutBtn) {
     checkoutBtn.addEventListener("click", function() {
         if (cart.length === 0) {
-            alert("Your cart is empty.");
+            alert("السلة فارغة!");
             return;
         }
 
@@ -99,14 +101,14 @@ if (checkoutBtn) {
             id: Date.now(),
             user: currentUser ? currentUser.email : "guest",
             items: [...cart],
-            status: "In Progress"
+            status: "قيد التنفيذ"
         };
 
         orders.push(newOrder);
         cart = [];
         saveData();
 
-        alert("Ordered Successfully!");
+        alert("تم تنفيذ الطلب بنجاح ✅");
         window.location.href = "my-orders.html";
     });
 }
@@ -121,7 +123,7 @@ if (ordersContainer) {
     function renderOrders() {
         ordersContainer.innerHTML = "";
         if (orders.length === 0) {
-            ordersContainer.innerHTML = "<p>There are no orders at the moment.</p>";
+            ordersContainer.innerHTML = "<p>لا توجد طلبات حتى الآن.</p>";
             return;
         }
 
@@ -129,10 +131,10 @@ if (ordersContainer) {
                     const div = document.createElement("div");
                     div.className = "order";
                     div.innerHTML = `
-                <h3>Order Number: ${order.id}</h3>
-                <p>Condition: ${order.status}</p>
+                <h3>طلب رقم: ${order.id}</h3>
+                <p>الحالة: ${order.status}</p>
                 <ul>
-                    ${order.items.map(item => `<li>${item.name} - ${item.price} EGP</li>`).join("")}
+                    ${order.items.map(item => `<li>${item.name} - ${item.price} جنيه</li>`).join("")}
                 </ul>
             `;
             ordersContainer.appendChild(div);
@@ -155,6 +157,6 @@ if (profileContainer && currentUser) {
         currentUser.name = document.getElementById("profileName").value;
         currentUser.phone = document.getElementById("profilePhone").value;
         saveData();
-        alert("Profile was updated successfully!");
+        alert("تم تحديث الملف الشخصي بنجاح ✅");
     });
 }

@@ -22,14 +22,39 @@ async function apiCall(endpoint, method = 'GET', data = null) {
     }
 
     try {
+        console.log('Making API call:', {
+            url: `${API_BASE_URL}${endpoint}`,
+            method,
+            data
+        });
+
         const response = await fetch(`${API_BASE_URL}${endpoint}`, options);
-        const result = await response.json();
+        
+        console.log('Response status:', response.status);
+        
+        // Get the text first to see what we're actually receiving
+        const text = await response.text();
+        console.log('Response text:', text);
+        
+        // Try to parse as JSON
+        let result;
+        try {
+            result = JSON.parse(text);
+        } catch (e) {
+            console.error('Failed to parse JSON:', e);
+            console.error('Received text:', text);
+            return {
+                success: false,
+                message: 'Server returned invalid response. Check console for details.'
+            };
+        }
+        
         return result;
     } catch (error) {
         console.error('API call error:', error);
         return {
             success: false,
-            message: 'Network error. Please check your connection.'
+            message: 'Network error. Please check your connection and ensure the backend is running.'
         };
     }
 }
