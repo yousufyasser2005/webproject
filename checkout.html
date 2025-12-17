@@ -1,157 +1,150 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Checkout | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .payment-select {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--border-light);
-      border-radius: var(--radius);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: inherit;
-      transition: var(--transition);
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 16px;
-    }
-
-    .payment-select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .payment-select:hover {
-      border-color: var(--border-medium);
-    }
-
-    /* Style the dropdown options */
-    .payment-select option {
-      padding: 0.75rem 1rem;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      border-bottom: 1px solid var(--border-light);
-      font-size: 0.95rem;
-    }
-
-    .payment-select option:first-child {
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .payment-select option:last-child {
-      border-bottom: none;
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
-
-    .payment-select option:hover {
-      background: var(--bg-secondary);
-      color: var(--primary);
-    }
-
-    .payment-select option:checked {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Checkout - MintLib</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="sell.html" class="nav-link">Sell</a>
-        <a href="cart.html" class="nav-link">Cart</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-        <a href="login.html" class="nav-link">Login</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+<div class="container header-inner">
+<a href="index.html" class="logo">📚 MintLib</a>
+<nav class="main-nav">
+<a href="about.html">About Us</a>
+<a href="sell.html" class="contact-link">Sell</a>
+<a href="cart.html" class="contact-link">Cart</a>
+<a href="my-orders.html" class="contact-link">My Orders</a>
+<a href="profile.html" class="contact-link">Profile</a>
+</nav>
+</div>
+</header>
 
-  <main>
-    <section class="features">
-      <div class="container">
-        <div class="section-header">
-          <h1 class="section-title">Checkout</h1>
-          <p class="section-subtitle">Complete your purchase</p>
-        </div>
-        <div class="form-container">
-          <form id="checkoutForm">
-            <div class="form-group">
-              <label for="customerName" class="form-label">Full Name</label>
-              <input type="text" id="customerName" class="form-input" placeholder="Enter your full name" required>
-            </div>
+<main class="container">
+<h1>Checkout</h1>
 
-            <div class="form-group">
-              <label for="customerAddress" class="form-label">Address</label>
-              <input type="text" id="customerAddress" class="form-input" placeholder="Enter your address" required>
-            </div>
+<div id="cartSummary" style="background: #f8fafc; padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem;">
+    <h3>Order Summary</h3>
+    <p id="cartItems">Loading cart...</p>
+    <p><strong>Total: <span id="orderTotal">0</span> EGP</strong></p>
+</div>
 
-            <div class="form-group">
-              <label for="paymentMethod" class="form-label">Payment Method</label>
-              <select id="paymentMethod" class="payment-select" required>
-                <option value="">Select payment method</option>
-                <option value="cash">Cash on Delivery</option>
-                <option value="card">Credit/Debit Card</option>
-              </select>
-            </div>
+<form id="checkoutForm">
+<label>Full Name:</label>
+<input type="text" id="customerName" required><br>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary" style="width: 100%">Confirm Order</button>
-            </div>
-          </form>
-          <p id="checkoutMessage" class="auth-footer"></p>
-        </div>
-      </div>
-    </section>
-  </main>
+<label>Street Address:</label>
+<input type="text" id="street" required><br>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+<label>City:</label>
+<input type="text" id="city" required><br>
+
+<label>State/Province:</label>
+<input type="text" id="state" required><br>
+
+<label>Zip Code:</label>
+<input type="text" id="zipCode" required><br>
+
+<label>Country:</label>
+<input type="text" id="country" value="Egypt" required><br>
+
+<label>Payment Method:</label>
+<select id="paymentMethod">
+<option value="cash">Cash on Delivery</option>
+<option value="credit_card">Credit Card</option>
+<option value="debit_card">Debit Card</option>
+</select><br>
+
+<button type="submit" class="btn">Submit Order</button>
+</form>
+<p id="checkoutMessage" class="message"></p>
+</main>
+
+<footer class="site-footer">
+<div class="container">
+<p>MintLib © 2025 - All Rights Reserved</p>
+<p><a href="contact.html">Contact Us</a></p>
+</div>
+</footer>
+
+<script src="js/api/config.js"></script>
+<script>
+let currentCart = null;
+
+async function loadCartSummary() {
+    const result = await apiCall('/cart', 'GET');
+    console.log('Cart for checkout:', result);
+    
+    if (result.success && result.data) {
+        currentCart = result.data;
+        
+        if (currentCart.items.length === 0) {
+            document.getElementById('cartItems').innerHTML = '<p style="color: #ef4444;">Your cart is empty! <a href="index.html">Continue shopping</a></p>';
+            document.getElementById('checkoutForm').style.display = 'none';
+            return;
+        }
+        
+        const itemsList = currentCart.items.map(item => 
+            `${item.title || 'Product'} x ${item.quantity} = ${item.price * item.quantity} EGP`
+        ).join('<br>');
+        
+        document.getElementById('cartItems').innerHTML = itemsList;
+        document.getElementById('orderTotal').textContent = currentCart.totalAmount;
+    } else {
+        document.getElementById('cartItems').innerHTML = '<p style="color: #ef4444;">Failed to load cart</p>';
+    }
+}
+
+document.getElementById('checkoutForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const message = document.getElementById('checkoutMessage');
+    message.textContent = 'Processing order...';
+    message.className = 'message';
+    
+    const shippingAddress = {
+        street: document.getElementById('street').value,
+        city: document.getElementById('city').value,
+        state: document.getElementById('state').value,
+        zipCode: document.getElementById('zipCode').value,
+        country: document.getElementById('country').value
+    };
+    
+    const paymentMethod = document.getElementById('paymentMethod').value;
+    
+    console.log('Placing order with:', { shippingAddress, paymentMethod });
+    
+    const result = await apiCall('/orders', 'POST', {
+        shippingAddress,
+        paymentMethod
+    });
+    
+    console.log('Order result:', result);
+    
+    if (result.success) {
+        message.className = 'success-message';
+        message.textContent = '✅ Order placed successfully! Redirecting...';
+        setTimeout(() => {
+            window.location.href = 'my-orders.html';
+        }, 1500);
+    } else {
+        message.className = 'error-message';
+        message.textContent = '❌ ' + (result.message || 'Failed to place order');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert('Please login first');
+        window.location.href = 'login.html';
+        return;
+    }
+    
+    loadCartSummary();
+});
+</script>
+<script src="script.js"></script>
 </body>
 </html>

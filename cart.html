@@ -1,93 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Cart | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="sell.html" class="nav-link">Sell</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-        <a href="login.html" class="nav-link">Login</a>
-      </nav>
-    </div>
-  </header>
 
-  <main>
-    <section class="features">
-      <div class="container">
-        <div class="section-header">
-          <h1 class="section-title">Your Cart</h1>
-          <p class="section-subtitle">Review your selected books before checkout</p>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cart - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">📚 MintLib</a>
+            <nav class="main-nav">
+                <a href="about.html">About Us</a>
+                <a href="sell.html" class="contact-link">Sell</a>
+                <a href="my-orders.html" class="contact-link">My Orders</a>
+                <a href="profile.html" class="contact-link">Profile</a>
+            </nav>
         </div>
-        <div class="form-container">
-          <table class="data-table">
+    </header>
+
+    <main class="container">
+        <h1>Your Cart</h1>
+        <table class="cart-table">
             <thead>
-              <tr>
-                <th>Book</th>
-                <th>Price</th>
-                <th>Remove</th>
-              </tr>
+                <tr>
+                    <th>Book</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Subtotal</th>
+                    <th>Remove</th>
+                </tr>
             </thead>
             <tbody id="cartItems">
-              <tr>
-                <td>Your cart is empty</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
+                <tr>
+                    <td colspan="5" style="text-align: center;">Loading...</td>
+                </tr>
             </tbody>
-          </table>
-          <div style="text-align: right; margin-top: 2rem;">
-            <p class="book-price">Total: <span id="cartTotal">0</span> EGP</p>
-            <a href="checkout.html" class="btn btn-primary" style="margin-top: 1rem;">Proceed to Checkout</a>
-          </div>
+        </table>
+        <p class="total">Total: <span id="cartTotal">0</span> EGP</p>
+        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+            <button onclick="clearCart()" class="btn" style="background: #ef4444;">Clear Cart</button>
+            <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
         </div>
-      </div>
-    </section>
-  </main>
+    </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+    </footer>
+    
+    <script src="js/api/config.js"></script>
+    <script src="js/api/cart.js"></script>
+    <script>
+        async function clearCart() {
+            if (confirm('Are you sure you want to clear your cart?')) {
+                const result = await apiCall('/cart/clear', 'DELETE');
+                if (result.success) {
+                    alert('Cart cleared!');
+                    loadCart();
+                } else {
+                    alert('Failed to clear cart: ' + result.message);
+                }
+            }
+        }
+    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>

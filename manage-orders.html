@@ -1,249 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Manage Orders | MintLib</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Manage Orders - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .orders-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
-        }
-
-        .order-card {
-            background: var(--bg-primary);
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--border-light);
-            transition: var(--transition);
-            box-shadow: var(--shadow);
-        }
-
-        .order-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .order-card h3 {
-            color: var(--text-primary);
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid var(--border-light);
-            padding-bottom: 0.5rem;
-        }
-
-        .order-card p {
-            color: var(--text-secondary);
-            margin-bottom: 0.75rem;
-            line-height: 1.5;
-        }
-
-        .order-card strong {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
-        .status {
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius);
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .status.pending {
-            background: var(--warning);
-            color: white;
-        }
-
-        .status.shipped {
-            background: var(--primary);
-            color: white;
-        }
-
-        .status.delivered {
-            background: var(--success);
-            color: white;
-        }
-
-        .status.cancelled {
-            background: var(--error);
-            color: white;
-        }
-
-        .order-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .view-btn {
-            background: var(--primary);
-            color: white;
-        }
-
-        .update-btn {
-            background: var(--secondary);
-            color: white;
-        }
-    </style>
 </head>
 
-<body>
-    <!-- Header -->
+<body class="manage-page">
+    <!-- Navbar -->
     <header class="site-header">
         <div class="container header-inner">
-            <a href="index.html" class="logo">
-                <span class="logo-icon">📚</span>
-                MintLib
-            </a>
+            <a href="index.html" class="logo">MintLib</a>
             <nav class="main-nav">
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
-                <a href="manage-books.html" class="nav-link">Manage Books</a>
-                <a href="manage-orders.html" class="nav-link active">Manage Orders</a>
-                <a href="manage-users.html" class="nav-link">Manage Users</a>
-                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="index.html">home</a>
+                <a href="manage-books.html">Manage Books</a>
+                <a href="manage-orders.html" class="active">Manage Orders</a>
+                <a href="manage-users.html">Manage Users</a>
+                <a href="profile.html" class="contact-link">Profile</a>
             </nav>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main>
-        <section class="features">
-            <div class="container">
-                <div class="section-header">
-                    <h1 class="section-title">Manage Orders</h1>
-                    <p class="section-subtitle">Track and manage all customer orders efficiently</p>
-                </div>
+    <!-- Page Header -->
+    <main class="container">
+        <h1 class="page-title">Manage Orders</h1>
+        <p class="subtitle">Track and manage all customer orders efficiently</p>
 
-                <!-- Orders Grid -->
-                <div class="orders-grid">
-                    <div class="order-card">
-                        <h3>Order #1023</h3>
-                        <p><strong>Customer:</strong> John Doe</p>
-                        <p><strong>Email:</strong> john.doe@example.com</p>
-                        <p><strong>Book:</strong> The Alchemist</p>
-                        <p><strong>Price:</strong> 150 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-15</p>
-                        <p><strong>Status:</strong> <span class="status shipped">Shipped</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <h3>Order #1024</h3>
-                        <p><strong>Customer:</strong> Sarah Smith</p>
-                        <p><strong>Email:</strong> sarah.smith@example.com</p>
-                        <p><strong>Book:</strong> Atomic Habits</p>
-                        <p><strong>Price:</strong> 200 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-16</p>
-                        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <h3>Order #1025</h3>
-                        <p><strong>Customer:</strong> Ahmed Hassan</p>
-                        <p><strong>Email:</strong> ahmed.hassan@example.com</p>
-                        <p><strong>Book:</strong> 1984</p>
-                        <p><strong>Price:</strong> 120 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-14</p>
-                        <p><strong>Status:</strong> <span class="status delivered">Delivered</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <h3>Order #1026</h3>
-                        <p><strong>Customer:</strong> Maria Garcia</p>
-                        <p><strong>Email:</strong> maria.garcia@example.com</p>
-                        <p><strong>Book:</strong> The Great Gatsby</p>
-                        <p><strong>Price:</strong> 180 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-17</p>
-                        <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <h3>Order #1027</h3>
-                        <p><strong>Customer:</strong> David Chen</p>
-                        <p><strong>Email:</strong> david.chen@example.com</p>
-                        <p><strong>Book:</strong> To Kill a Mockingbird</p>
-                        <p><strong>Price:</strong> 160 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-13</p>
-                        <p><strong>Status:</strong> <span class="status shipped">Shipped</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-
-                    <div class="order-card">
-                        <h3>Order #1028</h3>
-                        <p><strong>Customer:</strong> Emma Wilson</p>
-                        <p><strong>Email:</strong> emma.wilson@example.com</p>
-                        <p><strong>Book:</strong> Pride and Prejudice</p>
-                        <p><strong>Price:</strong> 140 EGP</p>
-                        <p><strong>Order Date:</strong> 2024-01-12</p>
-                        <p><strong>Status:</strong> <span class="status cancelled">Cancelled</span></p>
-                        <div class="order-actions">
-                            <button class="btn view-btn">View Details</button>
-                            <button class="btn update-btn">Update Status</button>
-                        </div>
-                    </div>
-                </div>
+        <!-- Orders List -->
+        <div class="orders-grid">
+            <!-- Example cards (can be generated dynamically) -->
+            <div class="order-card">
+                <h3>Order #1023</h3>
+                <p><strong>Customer:</strong> John Doe</p>
+                <p><strong>Book:</strong> The Alchemist</p>
+                <p><strong>Status:</strong> <span class="status shipped">Shipped</span></p>
+                <button class="view-btn">View Details</button>
             </div>
-        </section>
+
+            <div class="order-card">
+                <h3>Order #1024</h3>
+                <p><strong>Customer:</strong> Sarah Smith</p>
+                <p><strong>Book:</strong> Atomic Habits</p>
+                <p><strong>Status:</strong> <span class="status pending">Pending</span></p>
+                <button class="view-btn">View Details</button>
+            </div>
+
+            <div class="order-card">
+                <h3>Order #1025</h3>
+                <p><strong>Customer:</strong> Ahmed Hassan</p>
+                <p><strong>Book:</strong> 1984</p>
+                <p><strong>Status:</strong> <span class="status delivered">Delivered</span></p>
+                <button class="view-btn">View Details</button>
+            </div>
+        </div>
     </main>
 
-    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>MintLib</h3>
-                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="sell.html">Sell Books</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="shipping.html">Shipping Info</a></li>
-                        <li><a href="returns.html">Returns</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>MintLib © 2025 - All Rights Reserved</p>
-            </div>
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
         </div>
     </footer>
 
@@ -258,6 +76,11 @@
             }
         });
     </script>
+
+    <script src="js/api/config.js"></script>
+    <script src="js/api/admin-orders.js"></script>
+    <script src="script.js"></script>
+
 </body>
 
 </html>
