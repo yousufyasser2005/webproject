@@ -90,63 +90,9 @@
                     <h2 class="section-title">Latest Arrivals</h2>
                     <p class="section-subtitle">Discover recently added books from our community</p>
                 </div>
-                <div class="book-grid">
-                    <div class="book-card" onclick="window.location.href='book details.html?id=1'">
-                        <div class="book-cover-container">
-                            <div class="book-cover">
-                                <img src="images/goodbye-eri.jpg" alt="Goodbye, Eri" onerror="this.style.display='none'">
-                                <div class="book-cover-placeholder" style="display: none;">Goodbye, Eri</div>
-                            </div>
-                            <div class="book-status new">New</div>
-                        </div>
-                        <div class="book-info">
-                            <h3 class="book-title">Goodbye, Eri</h3>
-                            <p class="book-author">Tatsuki Fujimoto</p>
-                            <div class="book-meta">
-                                <span class="book-price">200 EGP</span>
-                                <div class="book-actions">
-                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(1)">Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="book-card" onclick="window.location.href='book details.html?id=2'">
-                        <div class="book-cover-container">
-                            <div class="book-cover">
-                                <img src="images/on-the-way-to-a-smile.jpg" alt="Final Fantasy VII: On the Way to a Smile" onerror="this.style.display='none'">
-                                <div class="book-cover-placeholder" style="display: none;">Final Fantasy VII</div>
-                            </div>
-                            <div class="book-status new">New</div>
-                        </div>
-                        <div class="book-info">
-                            <h3 class="book-title">Final Fantasy VII: On the Way to a Smile</h3>
-                            <p class="book-author">Kazushige Nojima</p>
-                            <div class="book-meta">
-                                <span class="book-price">1,500 EGP</span>
-                                <div class="book-actions">
-                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(2)">Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="book-card" onclick="window.location.href='book details.html?id=3'">
-                        <div class="book-cover-container">
-                            <div class="book-cover">
-                                <img src="images/harry-potter-6.jpg" alt="Harry Potter and the Half Blood Prince" onerror="this.style.display='none'">
-                                <div class="book-cover-placeholder" style="display: none;">Harry Potter</div>
-                            </div>
-                            <div class="book-status">Used</div>
-                        </div>
-                        <div class="book-info">
-                            <h3 class="book-title">Harry Potter and the Half Blood Prince</h3>
-                            <p class="book-author">J.K. Rowling</p>
-                            <div class="book-meta">
-                                <span class="book-price">125 EGP</span>
-                                <div class="book-actions">
-                                    <button class="action-btn" onclick="event.stopPropagation(); addToCart(3)">Add to Cart</button>
-                                </div>
-                            </div>
-                        </div>
+                <div id="bookGrid" class="book-grid">
+                    <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
+                        Loading books...
                     </div>
                 </div>
             </div>
@@ -184,11 +130,90 @@
             </div>
         </div>
     </footer>
+
+    <script src="js/api/config.js"></script>
     <script>
-        function addToCart(bookId) {
-            // Redirect to cart page
-            window.location.href = 'cart.html';
+        async function loadBooks() {
+            console.log('Loading books from database...');
+            const result = await apiCall('/books', 'GET');
+            console.log('Books result:', result);
+            
+            const bookGrid = document.getElementById('bookGrid');
+            
+            if (result.success && result.data && result.data.length > 0) {
+                bookGrid.innerHTML = '';
+                
+                result.data.forEach(book => {
+                    const bookCard = document.createElement('div');
+                    bookCard.className = 'book-card';
+                    bookCard.onclick = () => window.location.href = `book details.html?id=${book._id}`;
+                    
+                    const statusClass = book.condition === 'New' || book.condition === 'Like New' ? 'new' : '';
+                    
+                    bookCard.innerHTML = `
+                        <div class="book-cover-container">
+                            <div class="book-cover">
+                                <img src="${book.image}" alt="${book.title}" 
+                                     onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                                <div class="book-cover-placeholder" style="display: none;">${book.title}</div>
+                            </div>
+                            <div class="book-status ${statusClass}">${book.condition}</div>
+                        </div>
+                        <div class="book-info">
+                            <h3 class="book-title">${book.title}</h3>
+                            <p class="book-author">${book.author}</p>
+                            <div class="book-meta">
+                                <span class="book-price">${book.price} EGP</span>
+                                <div class="book-actions">
+                                    <button class="action-btn" onclick="event.stopPropagation(); addToCartQuick('${book._id}', '${book.title}', '${book.author}', ${book.price}, '${book.image}')">
+                                        Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    bookGrid.appendChild(bookCard);
+                });
+            } else {
+                bookGrid.innerHTML = `
+                    <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
+                        <p>No books available at the moment.</p>
+                        <p style="margin-top: 1rem;">
+                            <a href="sell.html" class="btn btn-primary">Be the first to sell a book!</a>
+                        </p>
+                    </div>
+                `;
+            }
         }
+
+        async function addToCartQuick(bookId, title, author, price, image) {
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                alert('Please login to add items to cart');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const result = await apiCall('/cart/add', 'POST', {
+                productId: bookId,
+                quantity: 1,
+                price: price,
+                title: title,
+                author: author,
+                image: image
+            });
+            
+            if (result.success) {
+                alert('Book added to cart!');
+            } else {
+                alert('Failed to add to cart: ' + result.message);
+            }
+        }
+
+        // Load books when page loads
+        document.addEventListener('DOMContentLoaded', loadBooks);
     </script>
     <script src="script.js"></script>
 </body>
