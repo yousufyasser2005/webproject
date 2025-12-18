@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -180,48 +179,6 @@
             color: #cbd5e1;
         }
         
-        .book-status-images {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        .status-image {
-            width: 100%;
-            aspect-ratio: 4/3;
-            border-radius: 8px;
-            overflow: hidden;
-            background: #f1f5f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .status-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .no-images-message {
-            grid-column: 1 / -1;
-            text-align: center;
-            padding: 3rem 2rem;
-            background: #f8fafc;
-            border-radius: 8px;
-            border: 2px dashed #cbd5e1;
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-        
-        .no-images-message::before {
-            content: "📷";
-            display: block;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            opacity: 0.5;
-        }
-        
         @media (max-width: 768px) {
             .book-detail-grid {
                 grid-template-columns: 1fr;
@@ -239,9 +196,6 @@
             }
             .book-detail-actions {
                 flex-direction: column;
-            }
-            .book-status-images {
-                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -272,7 +226,9 @@
                 <span id="breadcrumb-title">Book Details</span>
             </div>
 
-            <div class="book-detail-grid">
+            <div id="loading" style="text-align: center; padding: 3rem;">Loading book details...</div>
+
+            <div id="bookDetails" class="book-detail-grid" style="display: none;">
                 <div class="book-detail-image">
                     <div class="book-detail-cover">
                         <img id="detail-image" src="" alt="">
@@ -299,32 +255,23 @@
                                 <span id="detail-condition" class="book-info-value"></span>
                             </div>
                             <div class="book-info-item">
-                                <span class="book-info-label">Language</span>
-                                <span class="book-info-value">English</span>
+                                <span class="book-info-label">Category</span>
+                                <span id="detail-category" class="book-info-value"></span>
                             </div>
                             <div class="book-info-item">
-                                <span class="book-info-label">Format</span>
-                                <span class="book-info-value">Paperback</span>
+                                <span class="book-info-label">Stock</span>
+                                <span id="detail-stock" class="book-info-value"></span>
                             </div>
                             <div class="book-info-item">
                                 <span class="book-info-label">Availability</span>
-                                <span class="book-info-value">In Stock</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-detail-section">
-                        <h3>Book Status Images</h3>
-                        <div id="status-images-container" class="book-status-images">
-                            <div class="no-images-message">
-                                No preview images available for this book
+                                <span id="detail-status" class="book-info-value"></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="book-detail-actions">
                         <button class="btn btn-primary btn-large" onclick="addToCart()">Add to Cart</button>
-                        <button class="btn btn-secondary btn-large" onclick="window.location.href='index.html#books'">Browse More</button>
+                        <button class="btn btn-secondary btn-large" onclick="window.location.href='index.html'">Browse More</button>
                     </div>
                 </div>
             </div>
@@ -338,24 +285,6 @@
                     <h3>MintLib</h3>
                     <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
                 </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="sell.html">Sell Books</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="help.html">Help Center</a></li>
-                        <li><a href="shipping.html">Shipping Info</a></li>
-                        <li><a href="returns.html">Returns</a></li>
-                        <li><a href="privacy.html">Privacy Policy</a></li>
-                    </ul>
-                </div>
             </div>
             <div class="footer-bottom">
                 <p>MintLib © 2025 - All Rights Reserved</p>
@@ -363,61 +292,50 @@
         </div>
     </footer>
 
+    <script src="js/api/config.js"></script>
     <script>
-        // Book data
-        const books = [{
-            id: 1,
-            title: "Goodbye, Eri",
-            author: "Tatsuki Fujimoto",
-            price: "200 EGP",
-            image: "images/goodbye-eri.jpg",
-            condition: "New",
-            description: "A poignant and visually stunning manga that explores themes of loss, memory, and the power of storytelling. Tatsuki Fujimoto delivers an emotionally resonant narrative that blends reality and fiction in unexpected ways. This unique story follows a young filmmaker's journey through grief and creativity, told through Fujimoto's distinctive artistic style.",
-            statusImages: [] // No status images provided
-        }, {
-            id: 2,
-            title: "Final Fantasy VII: On the Way to a Smile",
-            author: "Kazushige Nojima",
-            price: "1,500 EGP",
-            image: "images/on-the-way-to-a-smile.jpg",
-            condition: "New",
-            description: "A collection of short stories that bridges the gap between Final Fantasy VII and Advent Children. Written by the scenario writer of the original game, these stories provide deeper insight into the beloved characters' lives after the main events. Explore the untold stories of Cloud, Tifa, Barret, and others as they navigate a world recovering from catastrophe.",
-            statusImages: [] // No status images provided
-        }, {
-            id: 3,
-            title: "Harry Potter and the Half Blood Prince",
-            author: "J.K. Rowling",
-            price: "125 EGP",
-            image: "images/harry-potter-6.jpg",
-            condition: "Used",
-            description: "The sixth installment in the beloved Harry Potter series takes readers deeper into the wizarding world's darkest secrets. As Lord Voldemort tightens his grip on both the Muggle and wizarding worlds, Harry discovers an old book marked as 'the property of the Half-Blood Prince' that helps him excel in Potions class. With Dumbledore's private lessons revealing crucial information about Voldemort's past, Harry prepares for the ultimate confrontation.",
-            statusImages: [] // No status images provided
-        }];
+        let currentBook = null;
 
-        // Get book ID from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const bookId = parseInt(urlParams.get('id'));
+        async function loadBookDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bookId = urlParams.get('id');
+            
+            if (!bookId) {
+                document.getElementById('loading').innerHTML = '<p style="color: red;">Book ID not provided</p>';
+                return;
+            }
 
-        // Find the book
-        const book = books.find(b => b.id === bookId);
+            const result = await apiCall(`/books/${bookId}`, 'GET');
+            console.log('Book result:', result);
+            
+            if (result.success && result.data) {
+                currentBook = result.data;
+                displayBook(currentBook);
+            } else {
+                document.getElementById('loading').innerHTML = '<p style="color: red;">Book not found</p>';
+            }
+        }
 
-        if (book) {
-            // Update page content
+        function displayBook(book) {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('bookDetails').style.display = 'grid';
+
             document.getElementById('detail-title').textContent = book.title;
             document.getElementById('detail-author').textContent = 'by ' + book.author;
-            document.getElementById('detail-price').textContent = book.price;
-            document.getElementById('detail-description').textContent = book.description;
+            document.getElementById('detail-price').textContent = book.price + ' EGP';
+            document.getElementById('detail-description').textContent = book.description || 'No description available';
             document.getElementById('detail-condition').textContent = book.condition;
+            document.getElementById('detail-category').textContent = book.category;
+            document.getElementById('detail-stock').textContent = book.stock + ' available';
+            document.getElementById('detail-status').textContent = book.status === 'available' ? 'In Stock' : 'Out of Stock';
             document.getElementById('breadcrumb-title').textContent = book.title;
 
-            // Update badge
             const badge = document.getElementById('detail-badge');
             badge.textContent = book.condition;
             if (book.condition === 'Used') {
                 badge.classList.add('used');
             }
 
-            // Update book cover image
             const img = document.getElementById('detail-image');
             const placeholder = document.getElementById('detail-placeholder');
 
@@ -435,39 +353,43 @@
             img.src = book.image;
             img.alt = book.title;
 
-            // Update status images
-            const statusImagesContainer = document.getElementById('status-images-container');
-            if (book.statusImages && book.statusImages.length > 0) {
-                statusImagesContainer.innerHTML = '';
-                book.statusImages.forEach(imageSrc => {
-                    const imageDiv = document.createElement('div');
-                    imageDiv.className = 'status-image';
-                    const imageEl = document.createElement('img');
-                    imageEl.src = imageSrc;
-                    imageEl.alt = 'Book condition photo';
-                    imageDiv.appendChild(imageEl);
-                    statusImagesContainer.appendChild(imageDiv);
-                });
-            } else {
-                // Keep the default "no images" message
-                statusImagesContainer.innerHTML = `
-                    <div class="no-images-message">
-                        No preview images available for this book
-                    </div>
-                `;
-            }
-
-            // Update page title
             document.title = book.title + ' - MintLib';
-        } else {
-            // Redirect to home if book not found
-            window.location.href = 'index.html';
         }
 
-        function addToCart() {
-            // Redirect to cart page
-            window.location.href = 'cart.html';
+        async function addToCart() {
+            if (!currentBook) return;
+            
+            const token = localStorage.getItem('token');
+            
+            if (!token) {
+                alert('Please login to add items to cart');
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            const result = await apiCall('/cart/add', 'POST', {
+                productId: currentBook._id,
+                quantity: 1,
+                price: currentBook.price,
+                title: currentBook.title,
+                author: currentBook.author,
+                image: currentBook.image
+            });
+            
+            console.log('Add to cart result:', result);
+            
+            if (result.success) {
+                alert('Book added to cart!');
+                const goToCart = confirm('Would you like to view your cart?');
+                if (goToCart) {
+                    window.location.href = 'cart.html';
+                }
+            } else {
+                alert('Failed to add to cart: ' + result.message);
+            }
         }
+
+        document.addEventListener('DOMContentLoaded', loadBookDetails);
     </script>
     <script src="script.js"></script>
 </body>
