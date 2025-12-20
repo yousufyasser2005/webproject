@@ -21,6 +21,30 @@
         .book-cover-container {
             position: relative;
         }
+
+        .category-filter-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-select {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #6366f1;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            cursor: pointer;
+            min-width: 250px;
+        }
+
+        .category-select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
     </style>
 </head>
 
@@ -30,7 +54,7 @@
             <a href="index.html" class="logo">
                 <span class="logo-icon">📚</span> MintLib
             </a>
-            <nav class="main-nav">
+            <nav class="main-nav" id="mainNav">
                 <a href="about.html" class="nav-link">About Us</a>
                 <a href="sell.html" class="nav-link">Sell</a>
                 <a href="cart.html" class="nav-link">Cart</a>
@@ -87,9 +111,17 @@
         <section class="books" id="books">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Latest Arrivals</h2>
-                    <p class="section-subtitle">Discover recently added books from our community</p>
+                    <h2 class="section-title">Browse Books</h2>
+                    <p class="section-subtitle">Discover books from our community</p>
                 </div>
+
+                <div class="category-filter-section">
+                    <label for="categorySelect" style="font-weight: 600; color: #1e293b;">Filter by Category:</label>
+                    <select id="categorySelect" class="category-select" onchange="filterByCategory()">
+                        <option value="">📚 All Categories</option>
+                    </select>
+                </div>
+
                 <div id="bookGrid" class="book-grid">
                     <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
                         Loading books...
@@ -133,17 +165,79 @@
 
     <script src="js/api/config.js"></script>
     <script>
+        let allBooks = [];
+
+        // Update navbar based on user role
+        function updateNavbar() {
+            const userData = JSON.parse(localStorage.getItem('user'));
+            const nav = document.getElementById('mainNav');
+            
+            if (userData && userData.role === 'administrator') {
+                nav.innerHTML = `
+                    <a href="manage book.html" class="nav-link">Manage Books</a>
+                    <a href="manage-orders.html" class="nav-link">Manage Orders</a>
+                    <a href="manage user.html" class="nav-link">Manage Users</a>
+                    <a href="manage-categories.html" class="nav-link">Categories</a>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                `;
+            } else if (userData) {
+                nav.innerHTML = `
+                    <a href="about.html" class="nav-link">About Us</a>
+                    <a href="sell.html" class="nav-link">Sell</a>
+                    <a href="cart.html" class="nav-link">Cart</a>
+                    <a href="my-orders.html" class="nav-link">My Orders</a>
+                    <a href="profile.html" class="nav-link">Profile</a>
+                `;
+            }
+        }
+
+        async function loadCategories() {
+            const result = await apiCall('/categories', 'GET');
+            
+            if (result.success && result.data) {
+                const categorySelect = document.getElementById('categorySelect');
+                
+                result.data.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.name;
+                    option.textContent = `${category.icon} ${category.name}`;
+                    categorySelect.appendChild(option);
+                });
+            }
+        }
+
         async function loadBooks() {
             console.log('Loading books from database...');
             const result = await apiCall('/books', 'GET');
             console.log('Books result:', result);
             
+            if (result.success && result.data) {
+                allBooks = result.data;
+                displayBooks(allBooks);
+            } else {
+                displayNoBooks();
+            }
+        }
+
+        function filterByCategory() {
+            const categorySelect = document.getElementById('categorySelect');
+            const selectedCategory = categorySelect.value;
+            
+            if (selectedCategory === '') {
+                displayBooks(allBooks);
+            } else {
+                const filtered = allBooks.filter(book => book.category === selectedCategory);
+                displayBooks(filtered, selectedCategory);
+            }
+        }
+
+        function displayBooks(books, categoryName = null) {
             const bookGrid = document.getElementById('bookGrid');
             
-            if (result.success && result.data && result.data.length > 0) {
+            if (books.length > 0) {
                 bookGrid.innerHTML = '';
                 
-                result.data.forEach(book => {
+                books.forEach(book => {
                     const bookCard = document.createElement('div');
                     bookCard.className = 'book-card';
                     bookCard.onclick = () => window.location.href = `book details.html?id=${book._id}`;
@@ -162,6 +256,7 @@
                         <div class="book-info">
                             <h3 class="book-title">${book.title}</h3>
                             <p class="book-author">${book.author}</p>
+                            <p class="book-author" style="font-size: 0.85rem; color: #6366f1;">📂 ${book.category}</p>
                             <div class="book-meta">
                                 <span class="book-price">${book.price} EGP</span>
                                 <div class="book-actions">
@@ -176,15 +271,20 @@
                     bookGrid.appendChild(bookCard);
                 });
             } else {
-                bookGrid.innerHTML = `
-                    <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
-                        <p>No books available at the moment.</p>
-                        <p style="margin-top: 1rem;">
-                            <a href="sell.html" class="btn btn-primary">Be the first to sell a book!</a>
-                        </p>
-                    </div>
-                `;
+                displayNoBooks(categoryName);
             }
+        }
+
+        function displayNoBooks(categoryName = null) {
+            const bookGrid = document.getElementById('bookGrid');
+            bookGrid.innerHTML = `
+                <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
+                    <p>No books available${categoryName ? ` in ${categoryName}` : ''} at the moment.</p>
+                    <p style="margin-top: 1rem;">
+                        <a href="sell.html" class="btn btn-primary">Be the first to sell a book!</a>
+                    </p>
+                </div>
+            `;
         }
 
         async function addToCartQuick(bookId, title, author, price, image) {
@@ -212,8 +312,11 @@
             }
         }
 
-        // Load books when page loads
-        document.addEventListener('DOMContentLoaded', loadBooks);
+        document.addEventListener('DOMContentLoaded', async () => {
+            updateNavbar();
+            await loadCategories();
+            await loadBooks();
+        });
     </script>
     <script src="script.js"></script>
 </body>
