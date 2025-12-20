@@ -1,199 +1,151 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sell Your Book | MintLib</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-  <style>
-    .sell-select {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--border-light);
-      border-radius: var(--radius);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: inherit;
-      transition: var(--transition);
-      cursor: pointer;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-      background-size: 16px;
-    }
-
-    .sell-select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .sell-select:hover {
-      border-color: var(--border-medium);
-    }
-
-    /* Style the dropdown options */
-    .sell-select option {
-      padding: 0.75rem 1rem;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      border-bottom: 1px solid var(--border-light);
-      font-size: 0.95rem;
-    }
-
-    .sell-select option:first-child {
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-
-    .sell-select option:last-child {
-      border-bottom: none;
-      border-radius: 0 0 var(--radius) var(--radius);
-    }
-
-    .sell-select option:hover {
-      background: var(--bg-secondary);
-      color: var(--primary);
-    }
-
-    .sell-select option:checked {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-    }
-
-    .file-input {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--border-light);
-      border-radius: var(--radius);
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      font-size: 1rem;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .file-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-    }
-
-    .file-input:hover {
-      border-color: var(--border-medium);
-    }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Sell Your Book - MintLib</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo">
-        <span class="logo-icon">📚</span>
-        MintLib
-      </a>
-      <nav class="main-nav">
-        <a href="about.html" class="nav-link">About Us</a>
-        <a href="cart.html" class="nav-link">Cart</a>
-        <a href="my-orders.html" class="nav-link">My Orders</a>
-        <a href="profile.html" class="nav-link">Profile</a>
-        <a href="login.html" class="nav-link">Login</a>
-      </nav>
-    </div>
-  </header>
+<header class="site-header">
+<div class="container header-inner">
+<a href="index.html" class="logo">📚 MintLib</a>
+<nav class="main-nav">
+<a href="about.html">About Us</a>
+<a href="cart.html" class="contact-link">Cart</a>
+<a href="my-orders.html" class="contact-link">My Orders</a>
+<a href="profile.html" class="contact-link">Profile</a>
+</nav>
+</div>
+</header>
 
-  <main>
-    <section class="features">
-      <div class="container">
-        <div class="section-header">
-          <h1 class="section-title">Sell Your Book</h1>
-          <p class="section-subtitle">List your book for sale and reach thousands of book lovers</p>
-        </div>
-        <div class="form-container">
-          <form id="sellForm">
-            <div class="form-group">
-              <label for="bookTitle" class="form-label">Book Title</label>
-              <input type="text" id="bookTitle" class="form-input" placeholder="Enter the book title" required>
-            </div>
+<main class="container">
+<h1>Sell Your Book</h1>
+<p style="margin-bottom: 2rem; color: #64748b;">Submit your book for review. Our team will approve it before it appears on the marketplace.</p>
 
-            <div class="form-group">
-              <label for="bookAuthor" class="form-label">Book Author</label>
-              <input type="text" id="bookAuthor" class="form-input" placeholder="Enter the author's name" required>
-            </div>
+<form id="sellForm" class="sell-form">
+<label>Book Title:</label>
+<input type="text" id="bookTitle" required><br>
 
-            <div class="form-group">
-              <label for="bookPrice" class="form-label">Requested Price (in EGP)</label>
-              <input type="number" id="bookPrice" class="form-input" placeholder="Enter price in EGP" min="1" required>
-            </div>
+<label>Book Author:</label>
+<input type="text" id="bookAuthor" required><br>
 
-            <div class="form-group">
-              <label for="bookImage" class="form-label">Book Cover</label>
-              <input type="file" id="bookImage" class="file-input" accept="image/*">
-            </div>
+<label>Book Category:</label>
+<select id="bookCategory" required>
+<option value="">-- Select a category --</option>
+</select><br>
 
-            <div class="form-group">
-              <label for="bookCondition" class="form-label">Book Condition</label>
-              <select id="bookCondition" class="sell-select" required>
-                <option value="">Select book condition</option>
-                <option value="New">New</option>
-                <option value="LikeNew">Like New</option>
-                <option value="Used">Used</option>
-              </select>
-            </div>
+<label>Book Description:</label>
+<textarea id="bookDescription" rows="4" placeholder="Describe your book..." required></textarea><br>
 
-            <div class="form-group">
-              <label for="deliveryMethod" class="form-label">Delivery Method</label>
-              <select id="deliveryMethod" class="sell-select" required>
-                <option value="">Select delivery method</option>
-                <option value="pickupPoint">Receive at Pickup Point</option>
-                <option value="home">Receive at Home</option>
-              </select>
-            </div>
+<label>Requested Price (in EGP):</label>
+<input type="number" id="bookPrice" min="1" required><br>
 
-            <div class="form-actions">
-              <button type="submit" class="btn btn-primary">Submit Book</button>
-            </div>
-          </form>
+<label>Book Cover Image URL:</label>
+<input type="text" id="bookImage" placeholder="images/mybook.jpg or leave empty for default"><br>
+<small style="color: #64748b;">Note: For now, please provide an image path.</small><br>
 
-          <p id="sellMessage" class="auth-footer"></p>
-        </div>
-      </div>
-    </section>
-  </main>
+<label>Book Condition:</label>
+<select id="bookCondition" required>
+<option value="New">New</option>
+<option value="Like New">Like New</option>
+<option value="Used">Used</option>
+</select><br>
 
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>MintLib</h3>
-          <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="sell.html">Sell Books</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Support</h3>
-          <ul class="footer-links">
-            <li><a href="help.html">Help Center</a></li>
-            <li><a href="shipping.html">Shipping Info</a></li>
-            <li><a href="returns.html">Returns</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>MintLib © 2025 - All Rights Reserved</p>
-      </div>
-    </div>
-  </footer>
-  <script src="script.js"></script>
+<label>Stock Quantity:</label>
+<input type="number" id="bookStock" value="1" min="1" required><br><br>
+
+<button type="submit" class="btn">Submit for Approval</button>
+</form>
+
+<p id="sellMessage" class="message"></p>
+</main>
+
+<footer class="site-footer">
+<div class="container">
+<p>MintLib © 2025 - All Rights Reserved</p>
+<p><a href="contact.html">Contact Us</a></p>
+</div>
+</footer>
+
+<script src="js/api/config.js"></script>
+<script>
+async function loadCategories() {
+    const result = await apiCall('/categories', 'GET');
+    
+    if (result.success && result.data) {
+        const categorySelect = document.getElementById('bookCategory');
+        
+        result.data.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.name;
+            option.textContent = `${category.icon} ${category.name}`;
+            categorySelect.appendChild(option);
+        });
+    }
+}
+
+document.getElementById('sellForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const message = document.getElementById('sellMessage');
+    message.textContent = 'Submitting your book for approval...';
+    message.className = 'message';
+    
+    const token = localStorage.getItem('token');
+    if (!token) {
+        message.className = 'error-message';
+        message.textContent = '❌ Please login first to sell a book';
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+        return;
+    }
+    
+    const bookData = {
+        title: document.getElementById('bookTitle').value,
+        author: document.getElementById('bookAuthor').value,
+        category: document.getElementById('bookCategory').value,
+        description: document.getElementById('bookDescription').value,
+        price: parseFloat(document.getElementById('bookPrice').value),
+        image: document.getElementById('bookImage').value || 'images/default-book.jpg',
+        condition: document.getElementById('bookCondition').value,
+        stock: parseInt(document.getElementById('bookStock').value)
+    };
+    
+    const result = await apiCall('/books', 'POST', bookData);
+    
+    if (result.success) {
+        message.className = 'success-message';
+        message.textContent = '✅ Book submitted successfully! It will appear on the marketplace once an admin approves it.';
+        
+        document.getElementById('sellForm').reset();
+        
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 3000);
+    } else {
+        message.className = 'error-message';
+        message.textContent = '❌ ' + (result.message || 'Failed to submit book.');
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        const message = document.getElementById('sellMessage');
+        message.className = 'error-message';
+        message.textContent = '⚠️ You need to be logged in to sell books. Redirecting...';
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 2000);
+        return;
+    }
+    
+    loadCategories();
+});
+</script>
+<script src="script.js"></script>
 </body>
 </html>
