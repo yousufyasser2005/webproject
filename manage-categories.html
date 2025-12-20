@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Manage Categories - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="manage-page">
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">📚 MintLib</a>
+            <nav class="main-nav">
+                <a href="index.html">Home</a>
+                <a href="manage book.html">Manage Books</a>
+                <a href="manage-orders.html">Manage Orders</a>
+                <a href="manage user.html">Manage Users</a>
+                <a href="manage-categories.html" class="active">Categories</a>
+                <a href="profile.html" class="contact-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <h1 class="page-title">Manage Categories</h1>
+        <p class="subtitle">Add, edit, and organize book categories</p>
+
+        <button onclick="showAddForm()" class="btn btn-primary" style="margin-bottom: 2rem;">+ Add New Category</button>
+
+        <div id="addForm" style="display: none; background: #f8fafc; padding: 2rem; border-radius: 8px; margin-bottom: 2rem;">
+            <h3>Add New Category</h3>
+            <form id="categoryForm">
+                <div class="form-group">
+                    <label>Category Name:</label>
+                    <input type="text" id="categoryName" required>
+                </div>
+                <div class="form-group">
+                    <label>Description:</label>
+                    <textarea id="categoryDescription" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Icon (emoji):</label>
+                    <input type="text" id="categoryIcon" placeholder="📚" maxlength="2">
+                </div>
+                <button type="submit" class="btn btn-primary">Add Category</button>
+                <button type="button" onclick="hideAddForm()" class="btn">Cancel</button>
+            </form>
+        </div>
+
+        <div id="categoriesGrid" class="users-grid">
+            <p style="text-align: center; padding: 2rem;">Loading categories...</p>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>MintLib © 2025 - All Rights Reserved</p>
+            <p><a href="contact.html">Contact Us</a></p>
+        </div>
+    </footer>
+
+    <script src="js/api/config.js"></script>
+    <script>
+        function showAddForm() {
+            document.getElementById('addForm').style.display = 'block';
+        }
+
+        function hideAddForm() {
+            document.getElementById('addForm').style.display = 'none';
+            document.getElementById('categoryForm').reset();
+        }
+
+        async function loadCategories() {
+            const result = await apiCall('/categories/admin/all', 'GET');
+            
+            const grid = document.getElementById('categoriesGrid');
+            
+            if (result.success && result.data && result.data.length > 0) {
+                grid.innerHTML = '';
+                
+                result.data.forEach(category => {
+                    const card = document.createElement('div');
+                    card.className = 'user-card';
+                    card.innerHTML = `
+                        <h3>${category.icon} ${category.name}</h3>
+                        <p><strong>Description:</strong> ${category.description || 'No description'}</p>
+                        <p><strong>Status:</strong> ${category.isActive ? '<span style="color: #10b981;">Active</span>' : '<span style="color: #ef4444;">Inactive</span>'}</p>
+                        <div class="actions">
+                            <button class="edit-btn" onclick="toggleCategoryStatus('${category._id}', ${!category.isActive})">
+                                ${category.isActive ? 'Deactivate' : 'Activate'}
+                            </button>
+                            <button class="delete-btn" onclick="deleteCategory('${category._id}')">Delete</button>
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+            } else {
+                grid.innerHTML = '<p style="text-align: center; padding: 2rem;">No categories found</p>';
+            }
+        }
+
+        document.getElementById('categoryForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const categoryData = {
+                name: document.getElementById('categoryName').value,
+                description: document.getElementById('categoryDescription').value,
+                icon: document.getElementById('categoryIcon').value || '📚'
+            };
+            
+            const result = await apiCall('/categories', 'POST', categoryData);
+            
+            if (result.success) {
+                alert('Category added successfully!');
+                hideAddForm();
+                loadCategories();
+            } else {
+                alert('Failed to add category: ' + result.message);
+            }
+        });
+
+        async function toggleCategoryStatus(categoryId, newStatus) {
+            const result = await apiCall(`/categories/${categoryId}`, 'PUT', { isActive: newStatus });
+            
+            if (result.success) {
+                alert('Category status updated!');
+                loadCategories();
+            } else {
+                alert('Failed to update category: ' + result.message);
+            }
+        }
+
+        async function deleteCategory(categoryId) {
+            if (confirm('Delete this category? Books using this category will need to be recategorized.')) {
+                const result = await apiCall(`/categories/${categoryId}`, 'DELETE');
+                
+                if (result.success) {
+                    alert('Category deleted successfully!');
+                    loadCategories();
+                } else {
+                    alert('Failed to delete category: ' + result.message);
+                }
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const userData = JSON.parse(localStorage.getItem("user"));
+
+            if (!userData || userData.role !== "administrator") {
+                window.location.href = "login.html";
+                return;
+            }
+
+            loadCategories();
+        });
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
