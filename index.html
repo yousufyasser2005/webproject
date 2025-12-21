@@ -11,6 +11,8 @@
         .book-card {
             cursor: pointer;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            flex: 0 0 300px;
+            min-width: 300px;
         }
         
         .book-card:hover {
@@ -20,30 +22,72 @@
         
         .book-cover-container {
             position: relative;
+            height: 350px;
         }
-
-        .category-filter-section {
+        
+        .book-info {
+            padding: 2rem;
+        }
+        
+        .book-title {
+            font-size: 1.3rem;
+        }
+        
+        .book-author {
+            font-size: 1.05rem;
+        }
+        
+        .book-price {
+            font-size: 1.4rem;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        
+        .carousel-wrapper {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 2rem;
+            overflow: hidden;
+            padding: 1rem 0;
+            flex-wrap: nowrap;
         }
-
-        .category-select {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid #6366f1;
-            border-radius: 8px;
-            background: white;
-            font-size: 1rem;
-            cursor: pointer;
-            min-width: 250px;
+        
+        .carousel-track {
+            display: flex;
+            gap: 2rem;
+            animation: scroll-infinite 30s linear infinite;
         }
-
-        .category-select:focus {
-            outline: none;
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        
+        .carousel-track:hover {
+            animation-play-state: paused;
+        }
+        
+        @keyframes scroll-infinite {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+        
+        .carousel-wrapper::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .carousel-controls {
+            display: none;
+        }
+        
+        .carousel-btn {
+            display: none;
+        }
+        
+        .carousel-dots {
+            display: none;
         }
     </style>
 </head>
@@ -56,6 +100,7 @@
             </a>
             <nav class="main-nav" id="mainNav">
                 <a href="about.html" class="nav-link">About Us</a>
+                <a href="books.html" class="nav-link">Browse Books</a>
                 <a href="sell.html" class="nav-link">Sell</a>
                 <a href="cart.html" class="nav-link">Cart</a>
                 <a href="my-orders.html" class="nav-link">My Orders</a>
@@ -76,7 +121,7 @@
                     <p class="hero-subtitle">Discover, trade, and fall in love with books again. You won't find a better place for your literary adventures.</p>
                     <div class="hero-actions">
                         <a href="sell.html" class="btn btn-primary">Sell Your Book</a>
-                        <a href="#books" class="btn btn-secondary">Browse Collection</a>
+                        <a href="books.html" class="btn btn-secondary">Browse Collection</a>
                     </div>
                 </div>
             </div>
@@ -115,16 +160,11 @@
                     <p class="section-subtitle">Discover books from our community</p>
                 </div>
 
-                <div class="category-filter-section">
-                    <label for="categorySelect" style="font-weight: 600; color: #1e293b;">Filter by Category:</label>
-                    <select id="categorySelect" class="category-select" onchange="filterByCategory()">
-                        <option value="">📚 All Categories</option>
-                    </select>
-                </div>
-
-                <div id="bookGrid" class="book-grid">
-                    <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
-                        Loading books...
+                <div class="carousel-container">
+                    <div id="bookGrid" class="carousel-wrapper">
+                        <div style="text-align: center; padding: 3rem; width: 100%;">
+                            Loading books...
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,7 +211,7 @@
         function updateNavbar() {
             const userData = JSON.parse(localStorage.getItem('user'));
             const nav = document.getElementById('mainNav');
-            
+
             if (userData && userData.role === 'administrator') {
                 nav.innerHTML = `
                     <a href="manage book.html" class="nav-link">Manage Books</a>
@@ -183,6 +223,7 @@
             } else if (userData) {
                 nav.innerHTML = `
                     <a href="about.html" class="nav-link">About Us</a>
+                    <a href="books.html" class="nav-link">Browse Books</a>
                     <a href="sell.html" class="nav-link">Sell</a>
                     <a href="cart.html" class="nav-link">Cart</a>
                     <a href="my-orders.html" class="nav-link">My Orders</a>
@@ -191,26 +232,11 @@
             }
         }
 
-        async function loadCategories() {
-            const result = await apiCall('/categories', 'GET');
-            
-            if (result.success && result.data) {
-                const categorySelect = document.getElementById('categorySelect');
-                
-                result.data.forEach(category => {
-                    const option = document.createElement('option');
-                    option.value = category.name;
-                    option.textContent = `${category.icon} ${category.name}`;
-                    categorySelect.appendChild(option);
-                });
-            }
-        }
-
         async function loadBooks() {
             console.log('Loading books from database...');
             const result = await apiCall('/books', 'GET');
             console.log('Books result:', result);
-            
+
             if (result.success && result.data) {
                 allBooks = result.data;
                 displayBooks(allBooks);
@@ -219,31 +245,24 @@
             }
         }
 
-        function filterByCategory() {
-            const categorySelect = document.getElementById('categorySelect');
-            const selectedCategory = categorySelect.value;
-            
-            if (selectedCategory === '') {
-                displayBooks(allBooks);
-            } else {
-                const filtered = allBooks.filter(book => book.category === selectedCategory);
-                displayBooks(filtered, selectedCategory);
-            }
-        }
-
-        function displayBooks(books, categoryName = null) {
+        function displayBooks(books) {
             const bookGrid = document.getElementById('bookGrid');
-            
+
             if (books.length > 0) {
-                bookGrid.innerHTML = '';
-                
-                books.forEach(book => {
+                // For infinite scroll, we need to duplicate books multiple times
+                const track = document.createElement('div');
+                track.className = 'carousel-track';
+
+                // Duplicate books 3 times for seamless infinite scroll
+                const infiniteBooks = [...books, ...books, ...books];
+
+                infiniteBooks.forEach(book => {
                     const bookCard = document.createElement('div');
                     bookCard.className = 'book-card';
                     bookCard.onclick = () => window.location.href = `book details.html?id=${book._id}`;
-                    
+
                     const statusClass = book.condition === 'New' || book.condition === 'Like New' ? 'new' : '';
-                    
+
                     bookCard.innerHTML = `
                         <div class="book-cover-container">
                             <div class="book-cover">
@@ -267,19 +286,22 @@
                             </div>
                         </div>
                     `;
-                    
-                    bookGrid.appendChild(bookCard);
+
+                    track.appendChild(bookCard);
                 });
+
+                bookGrid.innerHTML = '';
+                bookGrid.appendChild(track);
             } else {
-                displayNoBooks(categoryName);
+                displayNoBooks();
             }
         }
 
-        function displayNoBooks(categoryName = null) {
+        function displayNoBooks() {
             const bookGrid = document.getElementById('bookGrid');
             bookGrid.innerHTML = `
                 <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
-                    <p>No books available${categoryName ? ` in ${categoryName}` : ''} at the moment.</p>
+                    <p>No books available at the moment.</p>
                     <p style="margin-top: 1rem;">
                         <a href="sell.html" class="btn btn-primary">Be the first to sell a book!</a>
                     </p>
@@ -289,13 +311,13 @@
 
         async function addToCartQuick(bookId, title, author, price, image) {
             const token = localStorage.getItem('token');
-            
+
             if (!token) {
                 alert('Please login to add items to cart');
                 window.location.href = 'login.html';
                 return;
             }
-            
+
             const result = await apiCall('/cart/add', 'POST', {
                 productId: bookId,
                 quantity: 1,
@@ -304,7 +326,7 @@
                 author: author,
                 image: image
             });
-            
+
             if (result.success) {
                 alert('Book added to cart!');
             } else {
@@ -312,9 +334,8 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', async () => {
+        document.addEventListener('DOMContentLoaded', async() => {
             updateNavbar();
-            await loadCategories();
             await loadBooks();
         });
     </script>
