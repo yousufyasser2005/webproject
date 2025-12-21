@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Books - MintLib</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .books-page {
+            padding: 3rem 0;
+        }
+        
+        .books-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            color: #1e293b;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 1.2rem;
+        }
+        
+        .filters-container {
+            background: white;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .filter-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .filter-select {
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            color: #1e293b;
+            font-size: 0.95rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.1);
+        }
+        
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .books-count {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        
+        .no-books {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #64748b;
+            font-size: 1.1rem;
+        }
+        
+        .no-books::before {
+            content: "📚";
+            display: block;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+        
+        .reset-filters {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        .reset-btn {
+            background: #f1f5f9;
+            color: #1e293b;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .reset-btn:hover {
+            background: #e2e8f0;
+        }
+        
+        @media (max-width: 768px) {
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+            .books-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        /* Book card styles */
+        
+        .book-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            height: 100%;
+        }
+        
+        .book-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-color: #c7d2fe;
+        }
+        
+        .book-cover-container {
+            position: relative;
+            height: 250px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            overflow: hidden;
+        }
+        
+        .book-cover {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .book-card:hover .book-cover {
+            transform: scale(1.05);
+        }
+        
+        .book-cover-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-size: 1rem;
+            text-align: center;
+            padding: 1rem;
+        }
+        
+        .book-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .book-status.new {
+            background: #10b981;
+            color: white;
+        }
+        
+        .book-status.used {
+            background: #f59e0b;
+            color: white;
+        }
+        
+        .book-info {
+            padding: 1.5rem;
+        }
+        
+        .book-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            line-clamp: 2;
+            overflow: hidden;
+        }
+        
+        .book-author {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        
+        .book-category {
+            font-size: 0.85rem;
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+        
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+        
+        .book-price {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #6366f1;
+        }
+        
+        .book-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="container header-inner">
+            <a href="index.html" class="logo">
+                <span class="logo-icon">📚</span> MintLib
+            </a>
+            <nav class="main-nav">
+                <a href="about.html" class="nav-link">About Us</a>
+                <a href="sell.html" class="nav-link">Sell</a>
+                <a href="cart.html" class="nav-link">Cart</a>
+                <a href="my-orders.html" class="nav-link">My Orders</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+                <a href="login.html" class="nav-link">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="books-page">
+            <div class="container">
+                <div class="books-header">
+                    <h1 class="section-title">Browse All Books</h1>
+                    <p class="section-subtitle">Discover books from our community of readers</p>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <div class="search-icon">🔍</div>
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search books by title, author, or category...">
+                </div>
+
+                <!-- Filters -->
+                <div class="filters-container">
+                    <div class="filters-grid">
+                        <div class="filter-group">
+                            <label class="filter-label">Sort By</label>
+                            <select id="sortBy" class="filter-select">
+                                <option value="newest">Newest First</option>
+                                <option value="oldest">Oldest First</option>
+                                <option value="price-low">Price: Low to High</option>
+                                <option value="price-high">Price: High to Low</option>
+                                <option value="title-asc">Title: A-Z</option>
+                                <option value="title-desc">Title: Z-A</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Condition</label>
+                            <select id="conditionFilter" class="filter-select">
+                                <option value="all">All Conditions</option>
+                                <option value="New">New</option>
+                                <option value="Like New">Like New</option>
+                                <option value="Used">Used</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Price Range</label>
+                            <select id="priceFilter" class="filter-select">
+                                <option value="all">All Prices</option>
+                                <option value="0-100">Under 100 EGP</option>
+                                <option value="100-500">100 - 500 EGP</option>
+                                <option value="500-1000">500 - 1000 EGP</option>
+                                <option value="1000+">Above 1000 EGP</option>
+                            </select>
+                        </div>
+
+                        <div class="filter-group">
+                            <label class="filter-label">Category</label>
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="all">All Categories</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="reset-filters">
+                        <button id="resetFilters" class="reset-btn">Reset All Filters</button>
+                    </div>
+                </div>
+
+                <!-- Books Count -->
+                <div class="books-count">
+                    Showing <span id="booksCount">0</span> books
+                </div>
+
+                <!-- Books Grid -->
+                <div class="books-grid" id="booksGrid">
+                    <div style="text-align: center; padding: 3rem; grid-column: 1/-1;">
+                        Loading books...
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MintLib</h3>
+                    <p>Your trusted platform for trading used books. Connecting book lovers worldwide.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="books.html" class="active">Browse Books</a></li>
+                        <li><a href="sell.html">Sell Books</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul class="footer-links">
+                        <li><a href="help.html">Help Center</a></li>
+                        <li><a href="shipping.html">Shipping Info</a></li>
+                        <li><a href="returns.html">Returns</a></li>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>MintLib © 2025 - All Rights Reserved</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api/config.js"></script>
+    <script>
+        // State
+        let allBooks = [];
+        let filteredBooks = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async() => {
+            await loadCategories();
+            await loadBooks();
+            setupEventListeners();
+        });
+
+        // Load categories for the filter
+        async function loadCategories() {
+            const result = await apiCall('/categories', 'GET');
+
+            if (result.success && result.data) {
+                const categoryFilter = document.getElementById('categoryFilter');
+
+                result.data.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category.name;
+                    option.textContent = `${category.icon} ${category.name}`;
+                    categoryFilter.appendChild(option);
+                });
+            }
+        }
+
+        // Load books from database
+        async function loadBooks() {
+            console.log('Loading books from database...');
+            const result = await apiCall('/books', 'GET');
+            console.log('Books result:', result);
+
+            if (result.success && result.data) {
+                allBooks = result.data;
+                applyFilters();
+            } else {
+                showNoBooksMessage();
+            }
+        }
+
+        // Apply all filters and sorting
+        function applyFilters() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const condition = document.getElementById('conditionFilter').value;
+            const priceRange = document.getElementById('priceFilter').value;
+            const category = document.getElementById('categoryFilter').value;
+            const sortBy = document.getElementById('sortBy').value;
+
+            // Filter books
+            filteredBooks = allBooks.filter(book => {
+                // Search filter
+                const matchesSearch = searchTerm === '' ||
+                    book.title.toLowerCase().includes(searchTerm) ||
+                    book.author.toLowerCase().includes(searchTerm) ||
+                    (book.category && book.category.toLowerCase().includes(searchTerm));
+
+                // Condition filter
+                const matchesCondition = condition === 'all' || book.condition === condition;
+
+                // Price filter
+                let matchesPrice = true;
+                if (priceRange !== 'all') {
+                    const price = parseFloat(book.price);
+                    if (priceRange === '0-100') matchesPrice = price < 100;
+                    else if (priceRange === '100-500') matchesPrice = price >= 100 && price < 500;
+                    else if (priceRange === '500-1000') matchesPrice = price >= 500 && price < 1000;
+                    else if (priceRange === '1000+') matchesPrice = price >= 1000;
+                }
+
+                // Category filter - case insensitive
+                const matchesCategory = category === 'all' ||
+                    (book.category && book.category.toLowerCase() === category.toLowerCase());
+
+                return matchesSearch && matchesCondition && matchesPrice && matchesCategory;
+            });
+
+            // Sort books
+            filteredBooks.sort((a, b) => {
+                switch (sortBy) {
+                    case 'newest':
+                        return new Date(b.createdAt || 0) - new Date(a.createdAt || 0);
+                    case 'oldest':
+                        return new Date(a.createdAt || 0) - new Date(b.createdAt || 0);
+                    case 'price-low':
+                        return parseFloat(a.price) - parseFloat(b.price);
+                    case 'price-high':
+                        return parseFloat(b.price) - parseFloat(a.price);
+                    case 'title-asc':
+                        return a.title.localeCompare(b.title);
+                    case 'title-desc':
+                        return b.title.localeCompare(a.title);
+                    default:
+                        return 0;
+                }
+            });
+
+            displayBooks(filteredBooks);
+            updateBookCount(filteredBooks.length);
+        }
+
+        // Display books in grid
+        function displayBooks(books) {
+            const booksGrid = document.getElementById('booksGrid');
+
+            if (books.length === 0) {
+                booksGrid.innerHTML = `
+                <div class="no-books" style="grid-column: 1 / -1;">
+                    📚
+                    <h3 style="margin-top: 1rem;">No books found</h3>
+                    <p>Try adjusting your filters or <a href="sell.html">sell a book</a></p>
+                </div>
+            `;
+                return;
+            }
+
+            booksGrid.innerHTML = '';
+
+            books.forEach(book => {
+                const bookCard = document.createElement('div');
+                bookCard.className = 'book-card';
+                bookCard.onclick = () => window.location.href = `book details.html?id=${book._id}`;
+
+                const statusClass = book.condition === 'New' || book.condition === 'Like New' ? 'new' : 'used';
+
+                bookCard.innerHTML = `
+                <div class="book-cover-container">
+                    <img src="${book.image}" 
+                         alt="${book.title}" 
+                         class="book-cover"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <div class="book-cover-placeholder" style="display: none;">${book.title}</div>
+                    <div class="book-status ${statusClass}">${book.condition}</div>
+                </div>
+                <div class="book-info">
+                    <h3 class="book-title">${book.title}</h3>
+                    <p class="book-author">by ${book.author}</p>
+                    <p class="book-category">📂 ${book.category}</p>
+                    <div class="book-meta">
+                        <span class="book-price">${book.price} EGP</span>
+                        <div class="book-actions">
+                            <button class="action-btn" onclick="event.stopPropagation(); addToCart('${book._id}', '${book.title}', '${book.author}', ${book.price}, '${book.image}')">
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+                booksGrid.appendChild(bookCard);
+            });
+        }
+
+        function updateBookCount(count) {
+            const countElement = document.getElementById('booksCount');
+            if (countElement) {
+                countElement.textContent = count;
+            }
+        }
+
+        function showNoBooksMessage() {
+            const booksGrid = document.getElementById('booksGrid');
+            booksGrid.innerHTML = `
+            <div class="no-books" style="grid-column: 1 / -1;">
+                📚
+                <h3 style="margin-top: 1rem;">No books available</h3>
+                <a href="sell.html" class="btn btn-primary" style="margin-top: 1rem;">Sell Your Book</a>
+            </div>
+        `;
+            updateBookCount(0);
+        }
+
+        function setupEventListeners() {
+            // Search with debounce
+            const searchInput = document.getElementById('searchInput');
+            let searchTimeout;
+            searchInput.addEventListener('input', () => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => applyFilters(), 300);
+            });
+
+            // Filter changes
+            ['sortBy', 'conditionFilter', 'priceFilter', 'categoryFilter'].forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('change', () => applyFilters());
+                }
+            });
+
+            // Reset filters
+            const resetBtn = document.getElementById('resetFilters');
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                    document.getElementById('searchInput').value = '';
+                    document.getElementById('sortBy').value = 'newest';
+                    document.getElementById('conditionFilter').value = 'all';
+                    document.getElementById('priceFilter').value = 'all';
+                    document.getElementById('categoryFilter').value = 'all';
+                    applyFilters();
+                });
+            }
+        }
+
+        async function addToCart(bookId, title, author, price, image) {
+            const token = localStorage.getItem('token');
+
+            if (!token) {
+                alert('Please login to add items to cart');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const result = await apiCall('/cart/add', 'POST', {
+                productId: bookId,
+                quantity: 1,
+                price: price,
+                title: title,
+                author: author,
+                image: image
+            });
+
+            if (result.success) {
+                showNotification('Book added to cart!');
+            } else {
+                showNotification('Failed to add to cart: ' + result.message, 'error');
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: ${type === 'success' ? '#10b981' : '#ef4444'};
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            animation: slideIn 0.3s ease;
+        `;
+
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+
+</html>
